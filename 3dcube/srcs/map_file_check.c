@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/12 16:54:54 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:39:05 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	add_texture(int i, char *file, t_game game, int id)
 	
 	j = 0;
 	while (file[j] != "\n")
-	{
 		j++;
-	}
-	temp = (char *)malloc(sizeof (char) * j + 1);
+	temp = (char *)malloc(sizeof(char) * j + 1);
 	ft_memcpy(temp, file, j);
 	temp[j + 1] = '\0';
 	if (id == 0)
@@ -33,29 +31,56 @@ int	add_texture(int i, char *file, t_game game, int id)
 		game.mapdata.ea = ft_strdup(temp);
 	else if (id = 3)
 		game.mapdata.we = ft_strdup(temp);
-	// else if (id = 4)
-	// 	game.mapdata.c = ft_strdup(temp);
-	// else if (id = 5)
-	// 	game.mapdata.f = ft_strdup(temp);
 	free (temp);
 	return (i + j);
 }
 
-int	iswhitespace(int i, char *mapfile)
+int set_colors(int i, char *file, t_game game, int id)
 {
-	if (mapfile[i] == "\n" || mapfile[i] == " " || mapfile[i] == "\t")
-		i++;
-	return (i);
+	int		j;
+	int		k;
+	char	**temp;
+	
+	j = 0;
+	k = 0;
+	while (file[j] != "\n")
+		j++;
+	temp = ft_split(file, ',');	
+	if (id == 0)
+	{
+		while (k <= 2)
+		{
+			game.mapdata.c[k] = temp[k];
+			k++;
+		}
+	}
+	else if (id == 1)
+	{
+		while (k <= 2)
+		{
+			game.mapdata.f[k] = temp[k];
+			k++;
+		}
+	}
+	free_2d_array(temp);
+	return (i + j);
 }
 
 initialise_struct(t_mapdata mapdata)
 {
+	int		i;
+
 	mapdata.no == NULL;
 	mapdata.so == NULL;
 	mapdata.ea == NULL;
 	mapdata.we == NULL;
-	mapdata.c[0] == -1;
-	mapdata.f[0] == -1;
+	i = 0;
+	while (i <= 2)
+	{
+		mapdata.c[i] == -1;
+		mapdata.f[i] == -1;
+		i++;
+	}
 }
 
 charcheck(int i, t_game game, char *file)
@@ -69,9 +94,9 @@ charcheck(int i, t_game game, char *file)
 	else if (ft_strncmp("WE ", &file[i], 3) == 0)
 		i = add_texture(i + 3, file, game, 3);
 	else if (ft_strncmp("C ", &file[i], 2) == 0)
-		i = add_texture(i + 2, file, game, 4);
+		i = set_colors(i + 2, file, game, 0);
 	else if (ft_strncmp("F ", &file[i], 2) == 0)
-		i = add_texture(i + 2, file, game, 5);
+		i = set_colors(i + 2, file, game, 1);
 	else
 		i = -1;
 	return (i);

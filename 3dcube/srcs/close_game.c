@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   close_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 14:09:43 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/12 19:51:07 by jwilliam         ###   ########.fr       */
+/*   Created: 2023/01/12 20:03:31 by jwilliam          #+#    #+#             */
+/*   Updated: 2023/01/12 20:06:30 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	start_mlx(t_game game)
+int	close_win(t_game game)
 {
-	void	*mlx;
-	void	*mlx_win;
-
-	game.mlx = mlx_init();
-	game.mlx_window = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	mlx_destroy_window(game.mlx, game.mlx_window);
+	free(game.mlx);
+	free(game.img);
+	free_2d_array(game.tilemap);
+	exit(0);
 }

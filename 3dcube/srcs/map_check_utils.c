@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   map_check_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 14:09:43 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/12 19:51:07 by jwilliam         ###   ########.fr       */
+/*   Created: 2023/01/12 19:38:25 by jwilliam          #+#    #+#             */
+/*   Updated: 2023/01/12 19:38:54 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	start_mlx(t_game game)
+void	free_2d_array(char **array)
 {
-	void	*mlx;
-	void	*mlx_win;
+	int		i;
 
-	game.mlx = mlx_init();
-	game.mlx_window = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
+
+int	iswhitespace(int i, char *mapfile)
+{
+	if (mapfile[i] == "\n" || mapfile[i] == " " || mapfile[i] == "\t")
+		i++;
+	return (i);
 }
