@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/12 13:20:07 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:16:01 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ MLX Key codes
 # define KEY_DOWN 		125
 # define KEY_UP 		126
 
+/* Tile Types */
 typedef enum e_tiletype
 {
 	BLANK = ' ',
@@ -56,6 +57,7 @@ typedef struct s_vector
 	int	y;
 }	t_vector;
 
+/* Tile */
 typedef struct s_tile
 {
 	t_tiletype	type;
@@ -63,8 +65,45 @@ typedef struct s_tile
 	t_vector	*position;
 }	t_tile;
 
+/* Color */
+typedef struct s_color
+{
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+}	t_color;
+
+typedef struct s_images
+{
+	void	*image;
+	char	*address;
+	int		width;
+	int		height;
+	int		l_size;
+	int		bpp;
+	int		endian;
+}	t_images;
+
+/* Main Struct */
 typedef struct s_game
 {
-	t_tile	**tilemap;
+	void		*mlx;
+	void		*mlx_window;
+	t_vector	window_size;
+	t_tile		**tilemap;
+	t_images	*img;
+	t_mapdata	mapdata;
 }	t_game;
+
+typedef struct s_mapdata
+{
+	char	*no;
+	char	*so;
+	char	*ea;
+	char	*we;
+	int		c[3];
+	int		f[3];
+}	t_mapdata;
+
 #endif
