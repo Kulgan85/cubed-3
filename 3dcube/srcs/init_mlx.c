@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/12 14:41:51 by jwilliam         ###   ########.fr       */
+/*   Created: 2023/01/12 14:09:43 by jwilliam          #+#    #+#             */
+/*   Updated: 2023/01/12 14:42:12 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char **argv)
+void	start_mlx(t_mlx *mlx)
 {
-	int		file;
+	void	*mlx;
+	void	*mlx_win;
 
-	if (argc != 2)
-		print_error(1, "Invalid arguments - ./cub3d path_to_file/*.cub");
-	file = open(argv[1], O_RDONLY);
-	if (file < 0)
-		print_error(1, "Unable to open map file");
-	if (read_map(file) != 1)
-		print_error(1, "Invalid map file");
-	start_mlx();
-	init_image();
-	set_mlx_hooks();
-	mlx_loop(mlx);
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, WIN_TITLE);
 }
