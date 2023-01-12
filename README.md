@@ -1,2 +1,2 @@
-# cubed-3
+# cubed^3
 42 project
