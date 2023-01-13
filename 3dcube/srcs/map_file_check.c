@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/12 19:39:05 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:22:27 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,9 @@ int	init_check(char *mapfile, t_game game)
 		iswhitespace(i, mapfile);
 		charcheck(i, game, mapfile);
 		if (i < 0)
-			return (error(1, "bad map"));
+			return (error(1, "bad map file"));
 		i++;
 		j++;
 	}
+
 }
