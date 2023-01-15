@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/12 20:45:26 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:56:12 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	key_input(int key, void *param)
 	t_game		*game;
 
 	game = (t_game *)param;
+	(void)game;
 	if (key == KEY_ESC)
 		printf("Esc Key\n");
 	else if (key == KEY_UP)

@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 19:38:25 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/12 19:38:54 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:57:08 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_2d_array(char **array)
 
 int	iswhitespace(int i, char *mapfile)
 {
-	if (mapfile[i] == "\n" || mapfile[i] == " " || mapfile[i] == "\t")
+	if (mapfile[i] == '\n' || mapfile[i] == 32 || mapfile[i] == '\t')
 		i++;
 	return (i);
 }

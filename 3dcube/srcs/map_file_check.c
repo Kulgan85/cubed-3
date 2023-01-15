@@ -3,87 +3,81 @@
 /*                                                        :::      ::::::::   */
 /*   map_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/13 13:22:27 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:49:15 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	add_texture(int i, char *file, t_game game, int id)
+int	add_texture(int i, char *file, t_game *game, int id)
 {
 	int		j;
 	char	*temp;
-	
+
 	j = 0;
-	while (file[j] != "\n")
+	while (file[j] != '\n')
 		j++;
 	temp = (char *)malloc(sizeof(char) * j + 1);
 	ft_memcpy(temp, file, j);
 	temp[j + 1] = '\0';
 	if (id == 0)
-		game.mapdata.no = ft_strdup(temp);
-	else if (id = 1)
-		game.mapdata.so = ft_strdup(temp);
-	else if (id = 2)
-		game.mapdata.ea = ft_strdup(temp);
-	else if (id = 3)
-		game.mapdata.we = ft_strdup(temp);
+		game->mapdata.no = ft_strdup(temp);
+	else if (id == 1)
+		game->mapdata.so = ft_strdup(temp);
+	else if (id == 2)
+		game->mapdata.ea = ft_strdup(temp);
+	else if (id == 3)
+		game->mapdata.we = ft_strdup(temp);
 	free (temp);
 	return (i + j);
 }
 
-int set_colors(int i, char *file, t_game game, int id)
+int	set_colors(int i, char *file, t_game *game, int id)
 {
 	int		j;
 	int		k;
 	char	**temp;
-	
+
 	j = 0;
 	k = 0;
-	while (file[j] != "\n")
+	while (file[j] != '\n')
 		j++;
-	temp = ft_split(file, ',');	
+	temp = ft_split(file, ',');
 	if (id == 0)
 	{
-		while (k <= 2)
-		{
-			game.mapdata.c[k] = temp[k];
-			k++;
-		}
+		while (k++ <= 2)
+			game->mapdata.c[k] = ft_atoi(temp[k]);
 	}
 	else if (id == 1)
 	{
-		while (k <= 2)
-		{
-			game.mapdata.f[k] = temp[k];
-			k++;
-		}
+		while (k++ <= 2)
+			game->mapdata.f[k] = ft_atoi(temp[k]);
 	}
 	free_2d_array(temp);
 	return (i + j);
 }
 
-initialise_struct(t_mapdata mapdata)
+void	initialise_struct(t_mapdata *mapdata)
 {
 	int		i;
 
-	mapdata.no == NULL;
-	mapdata.so == NULL;
-	mapdata.ea == NULL;
-	mapdata.we == NULL;
+	mapdata->no = NULL;
+	mapdata->so = NULL;
+	mapdata->ea = NULL;
+	mapdata->we = NULL;
 	i = 0;
 	while (i <= 2)
 	{
-		mapdata.c[i] == -1;
-		mapdata.f[i] == -1;
+		mapdata->c[i] = -1;
+		mapdata->f[i] = -1;
 		i++;
 	}
 }
 
-charcheck(int i, t_game game, char *file)
+int	charcheck(int i, t_game *game, char *file)
 {
 	if (ft_strncmp("NO ", &file[i], 3) == 0)
 		i = add_texture(i + 3, file, game, 0);
@@ -102,22 +96,22 @@ charcheck(int i, t_game game, char *file)
 	return (i);
 }
 
-int	init_check(char *mapfile, t_game game)
+int	init_check(char *mapfile, t_game *game)
 {
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	initialise_struct(game.mapdata);
+	initialise_struct(&game->mapdata);
 	while (j < 6)
 	{
 		iswhitespace(i, mapfile);
 		charcheck(i, game, mapfile);
 		if (i < 0)
-			return (error(1, "bad map file"));
+			return (-1);
 		i++;
 		j++;
 	}
-
+	return (0);
 }

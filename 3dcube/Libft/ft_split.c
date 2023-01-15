@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 11:27:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2021/09/28 11:41:33 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/15 18:06:41 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-void	variableassign(int i, size_t j, int index)
+void	variableassign(int *i, size_t *j, int *index)
 {
-	i = 0;
-	j = 0;
-	index = -1;
+	*i = 0;
+	*j = 0;
+	*index = -1;
 }
 
 char	**ft_split(const char *s, char c)
@@ -65,7 +65,7 @@ char	**ft_split(const char *s, char c)
 	split = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!split)
 		return (NULL);
-	variableassign(i = 0, j = 0, index = -1);
+	variableassign(&i, &j, &index);
 	while (i <= ft_strlen((char *)s))
 	{
 		if (s[i] != c && index < 0)

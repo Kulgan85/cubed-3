@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/13 13:11:36 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:48:14 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Includes
 # include "mlx.h"
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 # include <fcntl.h>
 
 /*
@@ -116,5 +117,40 @@ typedef struct s_game
 	t_images	*img;
 	t_mapdata	mapdata;
 }	t_game;
+
+/* close_game.c */
+int			close_win(t_game game);
+
+/* error.c */
+void		print_error(int code, char *str);
+
+/* init_mlx.c */
+void		start_mlx(t_game *game);
+
+/* key_input.c */
+int			key_input(int key, void *param);
+
+/* map_check_utils.c */
+void		free_2d_array(char **array);
+int			iswhitespace(int i, char *mapfile);
+
+/* map_check.c */
+int			floodfill_single_tile_check(t_game *game, int x, int y);
+t_tiletype	define_tiletype(char definer);
+void		setup_tile(t_tile **tilemap, int x, int y);
+t_tile		**generate_tilemap(char **map, t_game *game);
+
+/* map_file_check.c */
+int			add_texture(int i, char *file, t_game *game, int id);
+int			set_colors(int i, char *file, t_game *game, int id);
+void		initialise_struct(t_mapdata *mapdata);
+int			charcheck(int i, t_game *game, char *file);
+int			init_check(char *mapfile, t_game *game);
+
+/* mlx_hooks.c */
+void		set_mlx_hooks(t_game game);
+
+/* tilemap_generator.c */
+char		**read_map(char *file);
 
 #endif

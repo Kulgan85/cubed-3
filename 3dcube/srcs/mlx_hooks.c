@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:00:52 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/12 20:41:14 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:33:35 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 void	set_mlx_hooks(t_game game)
 {
 	mlx_hook(game.mlx_window, 2, 0, key_input, &game);
-	mlx_hook(game.mlx_window, 17, 0 , close_win, &game);
+	mlx_hook(game.mlx_window, 17, 0, close_win, &game);
 	return ;
 }

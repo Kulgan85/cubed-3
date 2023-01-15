@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilemap_generator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:26:44 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/12 16:16:08 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/15 18:03:08 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char	**alloc_collumns(char *file)
 char	**read_map(char *file)
 {
 	char	**map;
+	char	*temp;
 	int		fd;
 	int		i;
 
@@ -71,8 +72,15 @@ char	**read_map(char *file)
 	}
 	fd = open(file, O_RDONLY);
 	i = 0;
-	while (get_next_line(fd, &map[i++]))
-		;
+	while (map[i])
+	{	
+		temp = get_next_line(fd);
+		if (!temp)
+			break ;
+		map[i] = ft_strdup(temp);
+		free(temp);
+		i++;
+	}
 	map[i] = NULL;
 	close (fd);
 	return (map);
