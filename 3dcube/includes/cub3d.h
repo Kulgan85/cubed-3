@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/15 17:48:14 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:57:28 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_game
 	t_tile		**tilemap;
 	t_images	*img;
 	t_mapdata	mapdata;
+	char		**file;
 }	t_game;
 
 /* close_game.c */
@@ -145,12 +146,13 @@ int			add_texture(int i, char *file, t_game *game, int id);
 int			set_colors(int i, char *file, t_game *game, int id);
 void		initialise_struct(t_mapdata *mapdata);
 int			charcheck(int i, t_game *game, char *file);
-int			init_check(char *mapfile, t_game *game);
+int			init_check(t_game *game);
 
 /* mlx_hooks.c */
 void		set_mlx_hooks(t_game game);
 
 /* tilemap_generator.c */
-char		**read_map(char *file);
+int			**read_map(char *file, t_game *game);
+int			map_init_check(t_game *game, char *map);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilemap_generator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:26:44 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/15 18:03:08 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:51:11 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static int	file_linecount(char	*file)
 {
 	int		linecount;
 	int		fd;
-	int		readcount;
-	char	c;
+	char	*readcount;
 
 	fd = open(file, O_RDONLY);
 	if (!fd)
@@ -27,13 +26,12 @@ static int	file_linecount(char	*file)
 	linecount = 1;
 	while (1)
 	{
-		readcount = read(fd, &c, 1);
-		if (readcount == 0)
+		readcount = get_next_line(fd);
+		if (readcount == NULL)
 			break ;
-		if (readcount < 0)
-			return (-1);
-		if (c == '\n')
+		else
 			linecount++;
+		free (readcount);
 	}
 	close (fd);
 	return (linecount);
@@ -57,7 +55,7 @@ static char	**alloc_collumns(char *file)
 }
 
 /* Creates the 2D char map found in the map file */
-char	**read_map(char *file)
+int	**read_map(char *file, t_game *game)
 {
 	char	**map;
 	char	*temp;
@@ -83,5 +81,6 @@ char	**read_map(char *file)
 	}
 	map[i] = NULL;
 	close (fd);
-	return (map);
+	game->file = map;
+	return (0);
 }

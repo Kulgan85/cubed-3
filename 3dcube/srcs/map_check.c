@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/13 16:37:39 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/16 13:11:06 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 /* "Flood fill" the map */
 int	floodfill_single_tile_check(t_game *game, int x, int y)
 {
-	if (game->tilemap[x][y].type == BLANK
-	&& game->tilemap[x][y].up->type != EMPTY
-	&& game->tilemap[x][y].down->type != EMPTY
-	&& game->tilemap[x][y].left->type != EMPTY
-	&& game->tilemap[x][y].right->type != EMPTY)
-		printf("good");
+	if (game->tilemap[x][y].type == BLANK ||
+			game->tilemap[x][y].type == NORTH ||
+			game->tilemap[x][y].type == SOUTH ||
+			game->tilemap[x][y].type == EAST ||
+			game->tilemap[x][y].type == WEST &&
+			game->tilemap[x][y].up->type != EMPTY &&
+			game->tilemap[x][y].down->type != EMPTY &&
+			game->tilemap[x][y].left->type != EMPTY &&
+			game->tilemap[x][y].right->type != EMPTY)
+	{
+		dprintf(2, "good");
+	}
 	else
 	{
-		printf("bad");
+		print_error(3, " - Flood Fill Failure");
+		return (0);
 	}
 	return (1);
 }
@@ -39,7 +46,7 @@ t_tiletype	define_tiletype(char definer)
 		return (NORTH);
 	if (definer == 'E')
 		return (EAST);
-	if (definer == 'w')
+	if (definer == 'W')
 		return (WEST);
 	else if (definer == 'S')
 		return (SOUTH);
@@ -72,21 +79,35 @@ t_tile	**generate_tilemap(char **map, t_game *game)
 
 	tilemap = alloc_tilemap(map);
 	if (!tilemap)
-		return (null_error("malloc error on alloc_tilemap()"));
+		printf("malloc error on alloc_tilemap()");
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
-		while (map[y][x] != '\0')
+		while (map[x][y] != '\0')
 		{
-			tilemap[y][x].type = define_tiletype(map[y][x]);
+			tilemap[x][y].type = define_tiletype(map[y][x]);
+			printf(tilemap[x][y].type);
 			setup_tile(tilemap, x, y);
-			floodfill_single_tile_check(game, x, y);
 			x++;
 		}
 		tilemap[y][x].type = 0;
 		y++;
 	}
+	y = 0;
+	printf("Check");
+	while (map[y])
+	{
+		x = 0;
+		while (map[x][y] != '\0')
+		{
+			printf("FLOOD FILL CHECK");
+			floodfill_single_tile_check(game, x, y);
+			x++;
+		}
+		y++;
+	}
+	printf("FLood fill complete");
 	tilemap[y] = NULL;
 	return (tilemap);
 }
