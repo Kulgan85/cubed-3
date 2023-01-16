@@ -3,50 +3,106 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
+#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/09/13 12:32:11 by tbertozz          #+#    #+#              #
-#    Updated: 2021/09/27 11:30:14 by tbertozz         ###   ########.fr        #
+#    Created: 2021/09/09 10:58:31 by jwilliam          #+#    #+#              #
+#    Updated: 2022/03/01 13:27:35 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS			=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c\
-					ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c\
-					ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c\
-					ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c\
-					ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c\
-					ft_strdup.c ft_striteri.c ft_strjoin.c ft_strlcat.c\
-					ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c\
-					ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c\
-					ft_tolower.c ft_toupper.c
+NAME = libft.a
 
-OBJS			= $(SRCS:.c=.o)
+CC = gcc
 
-BONUS			=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c \
-					ft_lstdelone.c ft_lstiter.c ft_lstlast.c \
-					ft_lstmap.c ft_lstnew.c ft_lstsize.c
-BONUS_OBJS		= $(BONUS:.c=.o)
+FLAGS = -Wall -Werror -Wextra -I./includes
 
-CC				= gcc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+RM = rm -rf
 
-NAME			= libft.a
+FILES = ft_isalpha.c \
+			ft_isdigit.c \
+			ft_isalnum.c \
+			ft_isascii.c \
+			ft_isprint.c \
+			ft_strlen.c \
+			ft_memset.c \
+			ft_bzero.c \
+			ft_memcpy.c \
+			ft_memmove.c \
+			ft_strlcpy.c \
+			ft_strlcat.c \
+			ft_toupper.c \
+			ft_tolower.c \
+			ft_strchr.c \
+			ft_strrchr.c \
+			ft_strncmp.c \
+			ft_memchr.c \
+			ft_memcmp.c \
+			ft_strnstr.c \
+			ft_atoi.c \
+			ft_calloc.c \
+			ft_strdup.c \
+			ft_substr.c \
+			ft_strjoin.c \
+			ft_strtrim.c \
+			ft_split.c \
+			ft_itoa.c \
+			ft_strmapi.c \
+			ft_striteri.c \
+			ft_putchar_fd.c \
+			ft_putstr_fd.c \
+			ft_putendl_fd.c \
+			ft_putnbr_fd.c \
+			ft_lstnew.c \
+			ft_lstadd_front.c \
+			ft_lstsize.c \
+			ft_lstlast.c \
+			ft_lstadd_back.c \
+			ft_lstdelone.c \
+			ft_lstclear.c \
+			ft_lstiter.c \
+			ft_lstmap.c \
+			ft_printf.c \
+			ft_printf_char.c \
+			ft_printf_hex.c \
+			ft_printf_int.c \
+			ft_printf_ptr.c \
+			ft_printf_str.c \
+			ft_printf_uint.c \
+			get_next_line.c \
 
-all:			$(NAME)
+OBJS_NAME = $(FILES:.c=.o)
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))
+SRC_DIR = srcs/
+OBJS_DIR = objs/
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+		@ar rcs $(NAME) $(OBJS)
+		@echo "\033[35m████████████████████████████"
+		@echo "\033[35m█████  \033[39mlibft  created  \033[35m█████"
+		@echo "\033[35m████████████████████████████ \033[39m"
+		
+$(OBJS_DIR)%.o: $(SRC_DIR)%.c
+		@mkdir -p $(OBJS_DIR)
+		@$(CC) $(FLAGS) -o $@ -c $< $(INC)
 
 clean:
-				$(RM) $(OBJS) $(BONUS_OBJS)
+		@$(RM) $(OBJS)
+		@$(RM) $(OBJS_DIR)
+		@echo "\033[33m████████████████████████████"
+		@echo "\033[33m█████  \033[39mcleaned  libft  \033[33m█████"
+		@echo "\033[33m█████  \033[39mobject   files  \033[33m█████"		
+		@echo "\033[33m████████████████████████████ \033[39m"
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean:	clean
+		@$(RM) $(NAME)
+		@echo "\033[33m████████████████████████████"
+		@echo "\033[33m█████ \033[39mcleaned  libft.a \033[33m█████"
+		@echo "\033[33m█████       \033[39mfiles      \033[33m█████"		
+		@echo "\033[33m████████████████████████████ \033[39m"
 
-re:				fclean $(NAME)
+re: fclean all
 
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-.PHONY:			all clean fclean re bonus
+.PHONY: clean fclean all re

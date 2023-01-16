@@ -6,7 +6,7 @@
 #    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/15 16:23:21 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/01/16 12:28:14 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,15 +16,14 @@ CC = gcc -g
 
 INCL = includes
 
-LIB = Libft
+LIB = libft
 GNL = gnl
 
 MLX = minilibx
 
 FLAGS = -Wall -Werror -Wextra
 
-#MLX_FL = -framework OpenGL -framework Appkit
-MLX_FL = -L/usr/lib -lXext -lX11 -lm -lz
+MLX_FL = -framework OpenGL -framework Appkit
 
 RM = rm -rf
 
@@ -38,7 +37,6 @@ FILES = main.c \
 		mlx_hooks.c \
 		tilemap_generator.c \
 
-
 OBJS_NAME = $(FILES:.c=.o)
 
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))
@@ -51,14 +49,14 @@ all: $(NAME)
 $(NAME): $(OBJS)
 		@$(MAKE) -C ./3dcube/$(LIB)
 		@$(MAKE) -C ./3dcube/$(MLX)
-		@$(CC) $(FLAGS) $(OBJS) -L$(LIB) ./3dcube/$(LIB)/$(LIB).a $(MLX_FL) -L$(MLX) ./3dcube/$(MLX)/$(MLX).a -o $@
+		@$(CC) $(FLAGS) $(OBJS) -L$(LIB) ./3dcube/$(LIB)/$(LIB).a  -L$(MLX) ./3dcube/$(MLX)/libmlx.a -o $@ $(MLX_FL)
 		@echo "\033[32m████████████████████████████"
 		@echo "\033[32m█████\033[39mminishell  created\033[32m█████"
 		@echo "\033[32m████████████████████████████\033[39m"
 
 $(OBJS_DIR)%.o: $(SRC_DIR)%.c
 		@mkdir -p $(OBJS_DIR)
-		@$(CC) $(FLAGS) -o $@ -c $< -I ./3dcube/$(INCL) -I ./3dcube/$(GNL) -I ./3dcube/$(LIB) $(MLX_FL) -I ./3dcube/$(MLX) 
+		@$(CC) $(FLAGS) $(GNL_FILES) -o $@ -c $< -I ./3dcube/$(INCL) -I ./3dcube/$(GNL) -I ./3dcube/$(LIB) -I ./3dcube/$(MLX) 
 
 clean:
 		@$(MAKE) clean -C ./3dcube/$(LIB)
