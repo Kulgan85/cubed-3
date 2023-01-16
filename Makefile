@@ -6,7 +6,7 @@
 #    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/16 12:28:14 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/01/16 12:32:21 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(NAME): $(OBJS)
 
 $(OBJS_DIR)%.o: $(SRC_DIR)%.c
 		@mkdir -p $(OBJS_DIR)
-		@$(CC) $(FLAGS) $(GNL_FILES) -o $@ -c $< -I ./3dcube/$(INCL) -I ./3dcube/$(GNL) -I ./3dcube/$(LIB) -I ./3dcube/$(MLX) 
+		@$(CC) $(FLAGS) $(GNL_FILES) -o $@ -c $< -I ./3dcube/$(INCL) -I ./3dcube/$(GNL) -I ./3dcube/$(LIB)/$(INCL) -I ./3dcube/$(MLX) 
 
 clean:
 		@$(MAKE) clean -C ./3dcube/$(LIB)
