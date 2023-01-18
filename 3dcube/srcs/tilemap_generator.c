@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilemap_generator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:26:44 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/16 14:51:11 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:23:54 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	file_linecount(char	*file)
 	fd = open(file, O_RDONLY);
 	if (!fd)
 		return (-1);
-	linecount = 1;
+	linecount = 0;
 	while (1)
 	{
 		readcount = get_next_line(fd);
@@ -34,6 +34,7 @@ static int	file_linecount(char	*file)
 		free (readcount);
 	}
 	close (fd);
+	printf("lines counted - %d\n", linecount);
 	return (linecount);
 }
 
@@ -55,31 +56,34 @@ static char	**alloc_collumns(char *file)
 }
 
 /* Creates the 2D char map found in the map file */
-int	**read_map(char *file, t_game *game)
+int	read_map(char *file, t_game *game)
 {
 	char	**map;
 	char	*temp;
 	int		fd;
 	int		i;
+	int		linecount;
 
 	map = alloc_collumns(file);
-	if (map == NULL)
+	if (!map)
 	{
 		printf("NULL MAP");
-		return (NULL);
+		return (-1);
 	}
+	linecount = file_linecount(file);
 	fd = open(file, O_RDONLY);
 	i = 0;
-	while (map[i])
+	while (i < linecount)
 	{	
 		temp = get_next_line(fd);
+		printf("read file portion - %s\n", temp);
 		if (!temp)
 			break ;
 		map[i] = ft_strdup(temp);
 		free(temp);
 		i++;
 	}
-	map[i] = NULL;
+	map[i] = 0;
 	close (fd);
 	game->file = map;
 	return (0);

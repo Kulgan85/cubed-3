@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/16 16:16:33 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:24:36 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,19 @@ void	initialise_struct(t_mapdata *mapdata)
 		mapdata->f[i] = -1;
 		i++;
 	}
+	mapdata->max_height = 0;
+	mapdata->max_width = 0;
 }
 
 int	charcheck(int i, t_game *game, char *file)
 {
 	char	**temp;
 
+	if (!file)
+		return (-1);
 	temp = ft_split(file, ' ');
+	if (!temp)
+		return (-1);
 	printf("In charcheck\n");
 	printf("%s\n", file);
 	if (ft_strncmp("NO", temp[0], 2) == 0)
@@ -105,6 +111,30 @@ int	charcheck(int i, t_game *game, char *file)
 	return (i);
 }
 
+int	check_map_settings(t_game *game)
+{
+	int		i;
+
+	i = 0;
+	if (game->mapdata.no == NULL)
+		return (-1);
+	if (game->mapdata.so == NULL)
+		return (-1);
+	if (game->mapdata.ea == NULL)
+		return (-1);
+	if (game->mapdata.we == NULL)
+		return (-1);
+	while (i < 3)
+	{
+		if (game->mapdata.c[i] < 0 || game->mapdata.c[i] > 255)
+			return (-1);
+		if (game->mapdata.f[i] < 0 || game->mapdata.f[i] > 255)
+			return (-1);
+		i++;
+	}
+	return (0);
+}
+
 int	init_check(t_game *game)
 {
 	int		i;
@@ -113,19 +143,19 @@ int	init_check(t_game *game)
 	i = 0;
 	j = 0;
 	initialise_struct(&game->mapdata);
-	while (game->file[j])
+	printf("start check map\n");
+	while (game->file[j] != NULL)
 	{
+		printf("current file line - %s\n", game->file[j]);
 		charcheck(i, game, game->file[j]);
 		printf("no is: %s\n", game->mapdata.no);
 		printf("ea is: %s\n", game->mapdata.ea);
 		printf("so is: %s\n", game->mapdata.so);
 		printf("we is: %s\n", game->mapdata.we);
-		printf("c is: %d%d%d\n", game->mapdata.c[0], game->mapdata.c[1], game->mapdata.c[2]);
-		printf("f is: %d%d%d\n", game->mapdata.f[0], game->mapdata.f[1], game->mapdata.f[2]);
-		if (i < 0)
-			return (-1);
-		i++;
+		printf("c is: %d,%d,%d\n", game->mapdata.c[0], game->mapdata.c[1], game->mapdata.c[2]);
+		printf("f is: %d,%d,%d\n", game->mapdata.f[0], game->mapdata.f[1], game->mapdata.f[2]);
 		j++;
 	}
+	printf("map check result %d\n", check_map_settings(game));
 	return (0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
+#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/16 14:28:38 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/01/18 20:07:25 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,16 @@ CC = gcc -g
 
 INCL = includes
 
-LIB = libft
+LIB = Libft
 GNL = gnl
 
-MLX = minilibx
+#MLX = minilibx
+MLX = minilibx-linux
 
 FLAGS = -Wall -Werror -Wextra
 
-MLX_FL = -framework OpenGL -framework Appkit
+#MLX_FL = -framework OpenGL -framework Appkit
+MLX_FL = -L/usr/lib -lXext -lX11 -lm -lz
 
 RM = rm -rf
 
@@ -32,6 +34,7 @@ FILES = main.c \
 		error.c \
 		init_mlx.c \
 		key_input.c \
+		map_check.c \
 		map_check_utils.c \
 		map_file_check.c \
 		mlx_hooks.c \
@@ -49,7 +52,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 		@$(MAKE) -C ./3dcube/$(LIB)
 		@$(MAKE) -C ./3dcube/$(MLX)
-		@$(CC) $(FLAGS) $(OBJS) -L$(LIB) ./3dcube/$(LIB)/$(LIB).a  -L$(MLX) ./3dcube/$(MLX)/libmlx.a -o $@ $(MLX_FL)
+		@$(CC) $(FLAGS) $(OBJS) -L$(LIB) ./3dcube/$(LIB)/libft.a  -L$(MLX) ./3dcube/$(MLX)/libmlx.a -o $@ $(MLX_FL)
 		@echo "\033[32m████████████████████████████"
 		@echo "\033[32m█████\033[39mminishell  created\033[32m█████"
 		@echo "\033[32m████████████████████████████\033[39m"

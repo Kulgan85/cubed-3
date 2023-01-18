@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/16 14:57:28 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/18 20:23:33 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct s_mapdata
 	char	*we;
 	int		c[3];
 	int		f[3];
+	int		max_width;
+	int		max_height;
 }	t_mapdata;
 
 /* Main Struct */
@@ -152,7 +154,7 @@ int			init_check(t_game *game);
 void		set_mlx_hooks(t_game game);
 
 /* tilemap_generator.c */
-int			**read_map(char *file, t_game *game);
+int			read_map(char *file, t_game *game);
 int			map_init_check(t_game *game, char *map);
 
 #endif
