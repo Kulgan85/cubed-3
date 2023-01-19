@@ -1,13 +1,13 @@
-NO ./file_goes_here
-SO ./file_goes_here
-WE ./file_goes_here
-EA ./file_goes_here
+NO ./nofile_goes_here
+SO ./sofile_goes_here
+WE ./wefile_goes_here
+EA ./eafile_goes_here
 
 F 200,200,200
 C 100,100,100
 
-11111111111111111111
-10000000000001000001
+111111111111111
+10000000000000011111
 10S01110111111100001
 100000101     100001
 10101010111   100001

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tilemap_generator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:26:44 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/18 20:23:54 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/19 11:52:02 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	**alloc_collumns(char *file)
 
 	line_count = file_linecount(file);
 	if (line_count <= 0)
-		printf("open or reading error, check the file exists");
+		printf("open or reading error, check the file exists\n");
 	map = malloc(sizeof(char *) * line_count + 1);
 	if (map == NULL)
 		printf("malloc error on alloc_map");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/18 20:23:33 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:50:54 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ MLX Key codes
 typedef enum e_tiletype
 {
 	BLANK = ' ',
-	EMPTY = '0',
+	FLOOR = '0',
 	WALL = '1',
 	NORTH = 'N',
 	SOUTH = 'S',
@@ -68,7 +68,7 @@ typedef struct s_tile
 {
 	t_tiletype		type;
 	t_tiletype		og_type;
-	t_vector		*position;
+	t_vector		position;
 	struct s_tile	*up;
 	struct s_tile	*down;
 	struct s_tile	*left;
@@ -138,9 +138,9 @@ void		free_2d_array(char **array);
 int			iswhitespace(int i, char *mapfile);
 
 /* map_check.c */
-int			floodfill_single_tile_check(t_game *game, int x, int y);
+int			floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap);
 t_tiletype	define_tiletype(char definer);
-void		setup_tile(t_tile **tilemap, int x, int y);
+void		setup_tile(t_tile **tilemap, int x, int y, t_game *game);
 t_tile		**generate_tilemap(char **map, t_game *game);
 
 /* map_file_check.c */

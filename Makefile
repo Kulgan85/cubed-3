@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/18 20:07:25 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/01/19 09:57:20 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,13 @@ INCL = includes
 LIB = Libft
 GNL = gnl
 
-#MLX = minilibx
-MLX = minilibx-linux
+MLX = minilibx
+#MLX = minilibx-linux
 
 FLAGS = -Wall -Werror -Wextra
 
-#MLX_FL = -framework OpenGL -framework Appkit
-MLX_FL = -L/usr/lib -lXext -lX11 -lm -lz
+MLX_FL = -framework OpenGL -framework Appkit
+#MLX_FL = -L/usr/lib -lXext -lX11 -lm -lz
 
 RM = rm -rf
 

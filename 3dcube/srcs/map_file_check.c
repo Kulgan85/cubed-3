@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_file_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/18 20:24:36 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:40:05 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,5 @@ int	init_check(t_game *game)
 		printf("f is: %d,%d,%d\n", game->mapdata.f[0], game->mapdata.f[1], game->mapdata.f[2]);
 		j++;
 	}
-	printf("map check result %d\n", check_map_settings(game));
-	return (0);
+	return(check_map_settings(game));
 }
