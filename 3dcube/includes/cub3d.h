@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 11:40:33 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:48:15 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,11 +149,14 @@ t_tile		**generate_tilemap(char **map, t_game *game);
 
 
 /* map_file_check.c */
-int			add_texture(int i, char *file, t_game *game, int id);
-int			set_colors(int i, char *file, t_game *game, int id);
 void		initialise_struct(t_mapdata *mapdata);
 int			charcheck(int i, t_game *game, char *file);
+int			check_map_settings(t_game *game);
 int			init_check(t_game *game);
+
+/* map_file_check_utils.c */
+int			add_texture(int i, char *file, t_game *game, int id);
+int			set_colors(int i, char *file, t_game *game, int id);
 
 /* mlx_hooks.c */
 void		set_mlx_hooks(t_game game);
