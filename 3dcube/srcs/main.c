@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/18 20:25:00 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/20 12:54:38 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		print_error(1, "Invalid map file");
 	printf("init done\n");
 	printf("try generate tile map\n");
-	game.tilemap = generate_tilemap(game.file, &game);
+	game.tilemap = generate_tilemap(&game);
 	// if (map_init_check(&game, argv[1]) != 0)
 	// 	print_error(1, "The maps fucked");
 //	start_mlx(&game);

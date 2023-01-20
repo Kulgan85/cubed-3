@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
+#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/20 11:49:22 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/01/20 12:55:44 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ FILES = main.c \
 		key_input.c \
 		map_check.c \
 		map_check_utils.c \
+		map_check_utils2.c \
 		map_file_check.c \
+		map_file_check_utils.c \
 		mlx_hooks.c \
 		tilemap_generator.c \
 

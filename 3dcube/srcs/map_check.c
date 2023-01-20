@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 11:44:39 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/20 14:47:47 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,29 @@
 /* Perform a lazy flood fill on the map */
 int	floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap)
 {
-	printf("Start Flooding with tile x: %d y: %d\n", x, y);
-	if (&tilemap[x][y])
+	printf("max height - %i, max width - %i\n", game->mapdata.max_height, game->mapdata.max_width);
+	printf("wall type - %d\n", tilemap[x][y].type);
+	if ((x == 0 || x == game->mapdata.max_width)
+		|| (y == 0 || y == game->mapdata.max_height))
 	{
-		printf("Exists with type of %d\n", tilemap[x][y].type);
+		if (tilemap[x][y].type == WALL || tilemap[x][y].type == BLANK)
+		{
+			printf("is outer wall\n");
+			return (1);
+		}
+		else
+		{
+			printf("is not outer wall\n");
+			return (0);
+		}
 	}
-	if (x == 0 || x == game->mapdata.max_width || y == 0
-		|| y == game->mapdata.max_height)
-	{
-		if (tilemap[x][y].type != WALL && tilemap[x][y].type != BLANK)
-			print_error(3, "Flood Fill Failure\n");
-	}
-	if (tilemap[x][y].type == WALL || tilemap[x][y].type == '\0'
-		|| tilemap[x][y].type == BLANK)
+	if (check_tile_skip(tilemap[x][y].type) == 0)
 		return (1);
-	if (
-		(tilemap[x][y].type == FLOOR
-		|| tilemap[x][y].type == NORTH
-		|| tilemap[x][y].type == SOUTH
-		|| tilemap[x][y].type == EAST
-		|| tilemap[x][y].type == WEST)
-		&&
-		(tilemap[x][y].up != NULL && tilemap[x][y].up->type != BLANK) &&
-		(tilemap[x][y].down != NULL && tilemap[x][y].down->type != BLANK) &&
-		(tilemap[x][y].left != NULL && tilemap[x][y].left->type != BLANK) &&
-		(tilemap[x][y].right != NULL && tilemap[x][y].up->type != BLANK))
-	{
-		printf("Good Fill\n");
-	}
+	if ((check_tile_floor(tilemap[x][y].type) == 0)
+		&& (check_adjacent_tile(tilemap, x, y) == 0))
+		return (1);
 	else
-	{
-		print_error(3, "Flood Fill Failure\n");
 		return (0);
-	}
-	return (1);
 }
 
 /* Returns the tiletype that corresponds to <definer> */
@@ -120,22 +109,36 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 	return (new);
 }
 
+static void	brute_force_print_map(t_tile **tilemap, t_game *game)
+{
+	int	x = 0;
+	int	y = 0;
+
+	while (y <= game->mapdata.max_height)
+	{
+		x = 0;
+		while (x < game->mapdata.max_width)
+		{
+			printf("%i,", tilemap[y][x].type);
+			x++;
+		}
+		printf("\n");
+		y++;
+	}
+}
+
 /* Returns a t_tile table filled according to map,
 columns ends in a NULL pointer */
-t_tile	**generate_tilemap(char **map, t_game *game)
+t_tile	**generate_tilemap(t_game *game)
 {
 	t_tile		**tilemap;
 	int			x;
 	int			y;
 	int			skip;
 
-	(void)map;
-	printf("Start skipping lines\n");
 	skip = skip_lines(game);
-	game->mapdata.max_height = (count_height(game, skip) - 1);
-	printf("map max height %i\n", game->mapdata.max_height);
+	game->mapdata.max_height = (count_height(game, skip));
 	game->mapdata.max_width = (count_width(game, skip) - 1);
-	printf("map max width %i\n", game->mapdata.max_width);
 	tilemap = alloc_tilemap(skip, game);
 	if (!tilemap)
 		printf("malloc error on alloc_tilemap()");
@@ -143,20 +146,22 @@ t_tile	**generate_tilemap(char **map, t_game *game)
 	while (game->file[skip + y] && y < game->mapdata.max_height)
 	{
 		x = 0;
+		while (game->file[skip + y][x] != '\0'
+			&& x < game->mapdata.max_width)
+		{
+			tilemap[y][x].type = define_tiletype(game->file[skip + y][x]);
+			setup_tile(tilemap, y, x, game);
+			x++;
+		}
 		while (x < game->mapdata.max_width)
 		{
-			printf("Loop number - X: %d Y: %d\n", x, y);
-			tilemap[x][y].type = define_tiletype(game->file[skip + y][x]);
-			setup_tile(tilemap, x, y, game);
+			tilemap[y][x].type = BLANK;
 			x++;
 		}
 		y++;
 	}
-	printf("Tilemap set\n");
 	if (perform_floodfill(game, tilemap) != 1)
 		print_error(3, "Invalid map");
-	printf("FLood fill complete");
-	tilemap[y] = NULL;
 	return (tilemap);
 }
 
@@ -172,11 +177,18 @@ int	perform_floodfill(t_game *game, t_tile **tilemap)
 		x = 0;
 		while (x < game->mapdata.max_width)
 		{
-			floodfill_tile_check(game, x, y, tilemap);
+			printf("col %i, row %i\n", x, y);
+			if (!(floodfill_tile_check(game, y, x, tilemap)))
+			{
+				printf("BAD\n");
+				brute_force_print_map(tilemap, game);
+				return (0);
+			}
 			x++;
 		}
 		y++;
 	}
+
 	printf("Flood fill complete\n\n");
 	return (1);
 }
