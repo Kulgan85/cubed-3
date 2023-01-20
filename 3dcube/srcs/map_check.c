@@ -6,13 +6,13 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/19 14:38:50 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:44:39 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* "Flood fill" the map */
+/* Perform a lazy flood fill on the map */
 int	floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap)
 {
 	printf("Start Flooding with tile x: %d y: %d\n", x, y);
@@ -47,7 +47,6 @@ int	floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap)
 	{
 		print_error(3, "Flood Fill Failure\n");
 		return (0);
-		printf("%d\n", game->mapdata.max_height);
 	}
 	return (1);
 }
@@ -55,7 +54,6 @@ int	floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap)
 /* Returns the tiletype that corresponds to <definer> */
 t_tiletype	define_tiletype(char definer)
 {
-	//printf("defining type\n");
 	if (definer == '1')
 		return (WALL);
 	if (definer == '0')
@@ -74,7 +72,6 @@ t_tiletype	define_tiletype(char definer)
 /* Set the size, original type and neighboors of the <x><y> tile of <tilemap> */
 void	setup_tile(t_tile **tilemap, int x, int y, t_game *game)
 {
-	//printf("start setup\n");
 	tilemap[y][x].og_type = tilemap[y][x].type;
 	tilemap[y][x].position.x = x;
 	tilemap[y][x].position.y = y;
@@ -94,47 +91,6 @@ void	setup_tile(t_tile **tilemap, int x, int y, t_game *game)
 		tilemap[y][x].right = &tilemap[y][x + 1];
 	else
 		tilemap[y][x].right = NULL;
-	//printf("good setup\n");
-}
-
-int	skip_lines(t_game *game)
-{
-	int			i;
-
-	i = 0;
-	while (ft_strtrim(game->file[i], " ")[0] != '1' &&
-			ft_strtrim(game->file[i], " ")[0] != '0')
-		i++;
-	return (i);
-}
-
-int	count_height(t_game *game, int skip)
-{
-	int		i;
-
-	i = 0;
-	while (game->file[skip + i] != 0)
-		i++;
-	return (i);
-}
-
-int	count_width(t_game *game, int skip)
-{
-	int		max;
-	int		i;
-	int		j;
-
-	max = 0;
-	i = 0;
-	j = 0;
-	while (game->file[skip + i] != 0)
-	{
-		j = ft_strlen(game->file[skip + i]);
-		if (j > max)
-			max = j;
-		i++;
-	}
-	return (max);
 }
 
 t_tile	**alloc_tilemap(int skip, t_game *game)
@@ -197,20 +153,30 @@ t_tile	**generate_tilemap(char **map, t_game *game)
 		y++;
 	}
 	printf("Tilemap set\n");
+	if (perform_floodfill(game, tilemap) != 1)
+		print_error(3, "Invalid map");
+	printf("FLood fill complete");
+	tilemap[y] = NULL;
+	return (tilemap);
+}
+
+int	perform_floodfill(t_game *game, t_tile **tilemap)
+{
+	int	y;
+	int	x;
+
 	y = 0;
+	printf("FLOOD FILL START\n");
 	while (y < game->mapdata.max_height)
 	{
 		x = 0;
 		while (x < game->mapdata.max_width)
 		{
-			printf("FLOOD FILL CHECK\n");
 			floodfill_tile_check(game, x, y, tilemap);
-			printf("FF complete\n\n");
 			x++;
 		}
 		y++;
 	}
-	printf("FLood fill complete");
-	tilemap[y] = NULL;
-	return (tilemap);
+	printf("Flood fill complete\n\n");
+	return (1);
 }

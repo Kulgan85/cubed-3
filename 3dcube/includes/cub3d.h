@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/19 13:50:54 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:40:33 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,12 +136,17 @@ int			key_input(int key, void *param);
 /* map_check_utils.c */
 void		free_2d_array(char **array);
 int			iswhitespace(int i, char *mapfile);
+int			skip_lines(t_game *game);
+int			count_height(t_game *game, int skip);
+int			count_width(t_game *game, int skip);
 
 /* map_check.c */
 int			floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap);
+int			perform_floodfill(t_game *game, t_tile **tilemap);
 t_tiletype	define_tiletype(char definer);
 void		setup_tile(t_tile **tilemap, int x, int y, t_game *game);
 t_tile		**generate_tilemap(char **map, t_game *game);
+
 
 /* map_file_check.c */
 int			add_texture(int i, char *file, t_game *game, int id);

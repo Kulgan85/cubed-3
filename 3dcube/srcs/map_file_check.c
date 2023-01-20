@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/19 14:40:05 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:21:36 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,16 @@ int	add_texture(int i, char *file, t_game *game, int id)
 	ft_memcpy(temp, file, j);
 	temp[j] = '\0';
 	printf("%s\n", temp);
-	if (id == 0)
+	if (id == 0 && game->mapdata.no == NULL)
 		game->mapdata.no = ft_strdup(temp);
-	else if (id == 1)
+	else if (id == 1 && game->mapdata.so == NULL)
 		game->mapdata.so = ft_strdup(temp);
-	else if (id == 2)
+	else if (id == 2 && game->mapdata.ea == NULL)
 		game->mapdata.ea = ft_strdup(temp);
-	else if (id == 3)
+	else if (id == 3 && game->mapdata.we == NULL)
 		game->mapdata.we = ft_strdup(temp);
+	else
+		print_error(3, "Duplicate texture files");
 	free (temp);
 	return (i + j);
 }
@@ -53,10 +55,12 @@ int	set_colors(int i, char *file, t_game *game, int id)
 	temp = ft_split(file, ',');
 	while (k < 3)
 	{
-		if (id == 0)
+		if (id == 0 && game->mapdata.c[k] == -1)
 			game->mapdata.c[k] = ft_atoi(temp[k]);
-		else if (id == 1)
+		else if (id == 1 && game->mapdata.f[k] == -1)
 			game->mapdata.f[k] = ft_atoi(temp[k]);
+		else
+			print_error(3, "Duplicate texture files");
 		k++;
 	}
 	free_2d_array(temp);
