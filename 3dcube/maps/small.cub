@@ -1,0 +1,12 @@
+NO ./nofile_goes_here
+SO ./sofile_goes_here
+WE ./wefile_goes_here
+EA ./eafile_goes_here
+
+F 200,200,200
+C 100,100,100
+
+1111
+10011111
+1S01
+1111

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 14:47:47 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/20 16:04:25 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,12 @@ t_tiletype	define_tiletype(char definer)
 }
 
 /* Set the size, original type and neighboors of the <x><y> tile of <tilemap> */
-void	setup_tile(t_tile **tilemap, int x, int y, t_game *game)
+void	setup_tile(t_tile **tilemap, int y, int x, t_game *game)
 {
 	tilemap[y][x].og_type = tilemap[y][x].type;
 	tilemap[y][x].position.x = x;
 	tilemap[y][x].position.y = y;
+	printf("good");
 	if (y > 0)
 		tilemap[y][x].up = &tilemap[y - 1][x];
 	else
@@ -88,44 +89,49 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 	t_tile	**new;
 
 	i = 0;
-	printf("%s\n", game->file[skip + i]);
-	while (game->file[skip + i] != 0)
-		i++;
-	new = malloc(sizeof(t_tile *) * game->mapdata.max_height);
+	// printf("%s\n", game->file[skip + i]);
+	// while (game->file[skip + i] != 0)
+	// 	i++;
+	new = (t_tile **)malloc(sizeof(t_tile *) * game->mapdata.max_height + 1);
 	if (!new)
 		return (NULL);
 	i = 0;
 	while (game->file[skip + i] != NULL)
 	{
-		new[i] = malloc(sizeof(t_tile) * game->mapdata.max_width);
+		printf("%d\n", game->mapdata.max_width);
+		new[i] = (t_tile *)malloc(sizeof(t_tile) * game->mapdata.max_width + 1);
 		if (new == NULL)
 		{
+			printf("Not malloc properly");
 			while (i > 0)
 				free(new[i--]);
 			return (NULL);
 		}
+		printf("Malloc properly\n");
+		printf("Loop number %i\n", i);
 		i++;
 	}
+	printf("done allocating\n");
 	return (new);
 }
 
-static void	brute_force_print_map(t_tile **tilemap, t_game *game)
-{
-	int	x = 0;
-	int	y = 0;
+// static void	brute_force_print_map(t_tile **tilemap, t_game *game)
+// {
+// 	int	x = 0;
+// 	int	y = 0;
 
-	while (y <= game->mapdata.max_height)
-	{
-		x = 0;
-		while (x < game->mapdata.max_width)
-		{
-			printf("%i,", tilemap[y][x].type);
-			x++;
-		}
-		printf("\n");
-		y++;
-	}
-}
+// 	while (y <= game->mapdata.max_height)
+// 	{
+// 		x = 0;
+// 		while (x < game->mapdata.max_width)
+// 		{
+// 			printf("%i,", tilemap[y][x].type);
+// 			x++;
+// 		}
+// 		printf("\n");
+// 		y++;
+// 	}
+// }
 
 /* Returns a t_tile table filled according to map,
 columns ends in a NULL pointer */
@@ -146,18 +152,31 @@ t_tile	**generate_tilemap(t_game *game)
 	while (game->file[skip + y] && y < game->mapdata.max_height)
 	{
 		x = 0;
-		while (game->file[skip + y][x] != '\0'
-			&& x < game->mapdata.max_width)
-		{
-			tilemap[y][x].type = define_tiletype(game->file[skip + y][x]);
-			setup_tile(tilemap, y, x, game);
-			x++;
-		}
 		while (x < game->mapdata.max_width)
 		{
-			tilemap[y][x].type = BLANK;
-			x++;
+			printf("%c\n", game->file[skip + y][x]);
+			if (game->file[skip + y][x] == '\0' || game->file[skip+y][x] == EOF)
+			{
+				printf("in new loop\n");
+				while (x <= game->mapdata.max_width)
+				{
+					tilemap[y][x].type = BLANK;
+					x++;
+				}
+			}
+			else
+			{
+				printf("in old loop");
+				printf("X: %i  Y: %i\n", x, y);
+				printf("defining\n");
+				tilemap[y][x].type = define_tiletype(game->file[skip + y][x]);
+				printf("defining done. Setting up\n");
+				setup_tile(tilemap, y, x, game);
+				printf("setup done.\n");
+				x++;
+			}
 		}
+
 		y++;
 	}
 	if (perform_floodfill(game, tilemap) != 1)
@@ -181,14 +200,13 @@ int	perform_floodfill(t_game *game, t_tile **tilemap)
 			if (!(floodfill_tile_check(game, y, x, tilemap)))
 			{
 				printf("BAD\n");
-				brute_force_print_map(tilemap, game);
+				//brute_force_print_map(tilemap, game);
 				return (0);
 			}
 			x++;
 		}
 		y++;
 	}
-
 	printf("Flood fill complete\n\n");
 	return (1);
 }

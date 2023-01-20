@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 13:07:18 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:55:57 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,13 +143,13 @@ int			count_width(t_game *game, int skip);
 /* map_check_utils2.c */
 int			check_tile_skip(t_tiletype tile);
 int			check_tile_floor(t_tiletype tile);
-int			check_adjacent_tile(t_tile **tilemap, int x, int y);
+int			check_adjacent_tile(t_tile **tilemap, int y, int x);
 
 /* map_check.c */
-int			floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap);
+int			floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap);
 int			perform_floodfill(t_game *game, t_tile **tilemap);
 t_tiletype	define_tiletype(char definer);
-void		setup_tile(t_tile **tilemap, int x, int y, t_game *game);
+void		setup_tile(t_tile **tilemap, int y, int x, t_game *game);
 t_tile		**generate_tilemap(t_game *game);
 
 
