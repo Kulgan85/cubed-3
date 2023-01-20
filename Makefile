@@ -6,7 +6,7 @@
 #    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/19 09:57:20 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/01/20 11:47:10 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ $(NAME): $(OBJS)
 		@$(MAKE) -C ./3dcube/$(MLX)
 		@$(CC) $(FLAGS) $(OBJS) -L$(LIB) ./3dcube/$(LIB)/libft.a  -L$(MLX) ./3dcube/$(MLX)/libmlx.a -o $@ $(MLX_FL)
 		@echo "\033[32m████████████████████████████"
-		@echo "\033[32m█████\033[39mminishell  created\033[32m█████"
+		@echo "\033[32m█████\033[39mcub3D      created\033[32m█████"
 		@echo "\033[32m████████████████████████████\033[39m"
 
 $(OBJS_DIR)%.o: $(SRC_DIR)%.c
@@ -67,7 +67,7 @@ clean:
 		@$(RM) $(OBJS)
 		@$(RM) $(OBJS_DIR)
 		@echo "\033[33m████████████████████████████"
-		@echo "\033[33m█████\033[39mcleaned  minishell\033[33m█████"
+		@echo "\033[33m█████\033[39mcleaned      cub3D\033[33m█████"
 		@echo "\033[33m█████   \033[39mobject files   \033[33m█████"		
 		@echo "\033[33m████████████████████████████\033[39m"
 
@@ -78,7 +78,7 @@ fclean:	clean
 		@$(RM) $(NAME).a
 		@echo "\033[33m████████████████████████████"
 		@echo "\033[33m█████      \033[39mcleaned     \033[33m█████"
-		@echo "\033[33m█████  \033[39mminishell file  \033[33m█████"		
+		@echo "\033[33m█████  \033[39mcub3D     file  \033[33m█████"		
 		@echo "\033[33m████████████████████████████\033[39m"
 
 re: fclean all
