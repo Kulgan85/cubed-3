@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 16:04:25 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/23 13:06:34 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ t_tiletype	define_tiletype(char definer)
 {
 	if (definer == '1')
 		return (WALL);
-	if (definer == '0')
+	else if (definer == '0')
 		return (FLOOR);
-	if (definer == 'N')
+	else if (definer == 'N')
 		return (NORTH);
-	if (definer == 'E')
+	else if (definer == 'E')
 		return (EAST);
-	if (definer == 'W')
+	else if (definer == 'W')
 		return (WEST);
 	else if (definer == 'S')
 		return (SOUTH);

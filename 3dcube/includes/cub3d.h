@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 15:55:57 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:21:28 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,21 @@ typedef struct s_color
 	int	a;
 }	t_color;
 
+/* An image that covers the whole window */
+typedef struct s_panel
+{
+	void		*pointer;
+	char		*pixels;
+	t_vector	size;
+	int			bpp;
+	int			line_size;
+	int			endian;
+}	t_panel;
+
 /* Image struct */
 typedef struct s_images
 {
-	void	*image;
+	void	*pointer;
 	char	*address;
 	int		width;
 	int		height;
@@ -109,6 +120,19 @@ typedef struct s_mapdata
 	int		max_height;
 }	t_mapdata;
 
+/* Player Struct */
+typedef struct s_player
+{
+	int		fov;
+	int		height;
+	double	x;
+	double	y;
+	double	rad;
+	double	direction;
+	double	rangle;
+}	t_player;
+
+
 /* Main Struct */
 typedef struct s_game
 {
@@ -119,19 +143,34 @@ typedef struct s_game
 	t_images	*img;
 	t_mapdata	mapdata;
 	char		**file;
+	t_player	doom_guy;
 }	t_game;
 
 /* close_game.c */
-int			close_win(t_game game);
+int			close_win(t_game *game);
+
+/* draw_beegee.c */
+void		draw_bg(t_game *game);
+int			create_trgb(int t, int r, int g, int b);
 
 /* error.c */
 void		print_error(int code, char *str);
 
+/* init_img.c */
+//int	init_image(t_game *game);
+void		*new_panel(t_game *game, t_color color);
+
 /* init_mlx.c */
 void		start_mlx(t_game *game);
 
+/* init_player.c */
+int			init_player(t_game *game);
+void		init_other(t_game *game);
+
 /* key_input.c */
 int			key_input(int key, void *param);
+void		move_guy(int key, t_game *game);
+void		rotate_guy(int key, t_game *game);
 
 /* map_check_utils.c */
 void		free_2d_array(char **array);
@@ -168,6 +207,4 @@ void		set_mlx_hooks(t_game game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);
-int			map_init_check(t_game *game, char *map);
-
 #endif

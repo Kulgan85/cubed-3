@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/20 12:55:44 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/01/23 14:52:30 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,11 @@ RM = rm -rf
 
 FILES = main.c \
 		close_game.c \
+		draw_beegee.c \
 		error.c \
+		init_img.c \
 		init_mlx.c \
+		init_player.c \
 		key_input.c \
 		map_check.c \
 		map_check_utils.c \
