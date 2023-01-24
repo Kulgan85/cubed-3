@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/23 16:21:28 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:47:11 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ Includes
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 
 /*
 MLX window settings
@@ -44,6 +45,11 @@ MLX Key codes
 # define KEY_DOWN 		125
 # define KEY_UP 		126
 
+/*
+Math schidt
+*/
+# define PI				3.142857
+
 /* Tile Types */
 typedef enum e_tiletype
 {
@@ -62,6 +68,12 @@ typedef struct s_vector
 	int	x;
 	int	y;
 }	t_vector;
+
+typedef struct s_pvector
+{
+	double	x;
+	double	y;
+}	t_pvector;
 
 /* Tile */
 typedef struct s_tile
@@ -123,15 +135,16 @@ typedef struct s_mapdata
 /* Player Struct */
 typedef struct s_player
 {
-	int		fov;
-	int		height;
-	double	x;
-	double	y;
-	double	rad;
-	double	direction;
-	double	rangle;
+	int			fov;
+	int			height;
+	t_pvector	direction;
+	double		speed;
+	double		x;
+	double		y;
+	double		rad;
+//	double		direction;
+	double		rangle;
 }	t_player;
-
 
 /* Main Struct */
 typedef struct s_game
@@ -151,14 +164,14 @@ int			close_win(t_game *game);
 
 /* draw_beegee.c */
 void		draw_bg(t_game *game);
-int			create_trgb(int t, int r, int g, int b);
+int			create_rgb(int r, int g, int b);
 
 /* error.c */
 void		print_error(int code, char *str);
 
 /* init_img.c */
-//int	init_image(t_game *game);
-void		*new_panel(t_game *game, t_color color);
+int			init_image(t_game *game);
+// void		*new_panel(t_game *game, t_color color);
 
 /* init_mlx.c */
 void		start_mlx(t_game *game);
@@ -191,7 +204,6 @@ t_tiletype	define_tiletype(char definer);
 void		setup_tile(t_tile **tilemap, int y, int x, t_game *game);
 t_tile		**generate_tilemap(t_game *game);
 
-
 /* map_file_check.c */
 void		initialise_struct(t_mapdata *mapdata);
 int			charcheck(int i, t_game *game, char *file);
@@ -203,7 +215,7 @@ int			add_texture(int i, char *file, t_game *game, int id);
 int			set_colors(int i, char *file, t_game *game, int id);
 
 /* mlx_hooks.c */
-void		set_mlx_hooks(t_game game);
+void		set_mlx_hooks(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);

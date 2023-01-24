@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/23 16:23:06 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:52:43 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	t_color	color;
 
 	start_mlx(&game);
 	if (argc != 2)
@@ -30,17 +29,10 @@ int	main(int argc, char **argv)
 	printf("try generate tile map\n");
 	game.tilemap = generate_tilemap(&game);
 	init_player(&game);
-	//game.img = init_image(game.mlx, WIN_WIDTH, WIN_HEIGHT);
-	color.b = 100;
-	color.g = 100;
-	color.r = 100;
-	color.a = 255;
+	init_image(&game);
 	printf("test\n");
-	game.img = new_panel(&game, color);
-	printf("good panel\n");
-	mlx_put_image_to_window(game.mlx, game.mlx_window, game.img, 0, 0);
 	printf("bad mlx\n");
 	draw_bg(&game);
-	set_mlx_hooks(game);
+	set_mlx_hooks(&game);
 	mlx_loop(game.mlx);
 }

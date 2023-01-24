@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/23 14:06:24 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:47:34 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,31 @@ void	init_other(t_game *game)
 	game->doom_guy.height = 32;
 	game->doom_guy.rad = 0;
 	game->doom_guy.rangle = 0;
+	game->doom_guy.speed = 0.5;
 }
 
 void	init_dir(t_game *game, int y, int x)
 {
 	if (game->tilemap[y][x].type == NORTH)
-		game->doom_guy.direction = 0;
+	{
+		game->doom_guy.direction.x = 0;
+		game->doom_guy.direction.y = -1;
+	}
 	if (game->tilemap[y][x].type == EAST)
-		game->doom_guy.direction = 90;
+	{
+		game->doom_guy.direction.x = 1;
+		game->doom_guy.direction.y = 0;
+	}
 	if (game->tilemap[y][x].type == SOUTH)
-		game->doom_guy.direction = 180;
+	{
+		game->doom_guy.direction.x = 0;
+		game->doom_guy.direction.y = 1;
+	}
 	if (game->tilemap[y][x].type == WEST)
-		game->doom_guy.direction = 270;
+	{
+		game->doom_guy.direction.x = -1;
+		game->doom_guy.direction.y = 0;
+	}
 }
 
 int	init_player(t_game *game)
