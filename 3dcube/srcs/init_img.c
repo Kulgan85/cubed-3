@@ -3,31 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   init_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:47:42 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/24 12:56:22 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/27 09:40:22 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	init_image(t_game *game)
-{
-	printf("in init\n");
-	game->img = (t_images *)malloc(sizeof (t_images));
-	game->img->width = WIN_WIDTH;
-	game->img->height = WIN_HEIGHT;
-	game->img->pointer = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	printf("fine\n");
-	game->img->address = mlx_get_data_addr(game->img->pointer,
-			&game->img->bpp, &game->img->l_size, &game->img->endian);
-	printf("I'm really not\n");
-	return (1);
-}
+// int	init_image(t_game *game)
+// {
+// 	printf("in init\n");
+// 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+// 	printf("fine\n");
+// 	game->img->address = mlx_get_data_addr(game->img->image, &game->img->bpp, &game->img->l_size, &game->img->endian);
+// 	printf("I'm really not\n");
+// 	return (1);
+// }
 
-/* 
-	Returns a t_color struct
+/* Returns a t_color struct */
 t_color	new_color(int r, int g, int b, int a)
 {
 	t_color	color;
@@ -39,7 +34,7 @@ t_color	new_color(int r, int g, int b, int a)
 	return (color);
 }
 
-	Set all pixels in <panel> to <color>
+/* Set all pixels in <panel> to <color> */
 void	color_panel(t_panel *panel, t_color color)
 {
 	int	x;
@@ -63,7 +58,7 @@ void	color_panel(t_panel *panel, t_color color)
 	}
 }
 
-	Returns a colred image of the same size as the window
+/* Returns a colred image of the same size as the window */
 void	*new_panel(t_game *game, t_color color)
 {
 	t_panel	panel;
@@ -75,4 +70,3 @@ void	*new_panel(t_game *game, t_color color)
 	color_panel(&panel, color);
 	return (panel.pointer);
 }
-*/
