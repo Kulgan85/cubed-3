@@ -6,27 +6,32 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:47:42 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/27 09:40:22 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:43:53 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// int	init_image(t_game *game)
-// {
-// 	printf("in init\n");
-// 	game->img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-// 	printf("fine\n");
-// 	game->img->address = mlx_get_data_addr(game->img->image, &game->img->bpp, &game->img->l_size, &game->img->endian);
-// 	printf("I'm really not\n");
-// 	return (1);
-// }
 
-/* Returns a t_color struct */
+int	init_image(t_game *game)
+{
+	printf("in init\n");
+	game->img = (t_images *)malloc(sizeof (t_images));
+	game->img->width = WIN_WIDTH;
+	game->img->height = WIN_HEIGHT;
+	game->img->pointer = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	printf("fine\n");
+	game->img->address = mlx_get_data_addr(game->img->pointer,
+			&game->img->bpp, &game->img->l_size, &game->img->endian);
+	printf("Yes I am good\n");
+	return (1);
+}
+
+/* 
+	Returns a t_color struct
 t_color	new_color(int r, int g, int b, int a)
 {
 	t_color	color;
-
 	color.r = (char)r;
 	color.g = (char)g;
 	color.b = (char)b;
@@ -34,12 +39,11 @@ t_color	new_color(int r, int g, int b, int a)
 	return (color);
 }
 
-/* Set all pixels in <panel> to <color> */
+	Set all pixels in <panel> to <color>
 void	color_panel(t_panel *panel, t_color color)
 {
 	int	x;
 	int	y;
-
 	panel->pixels = mlx_get_data_addr(panel->pointer, &panel->bpp,
 			&panel->line_size, &panel->endian);
 	y = 0;
@@ -58,11 +62,10 @@ void	color_panel(t_panel *panel, t_color color)
 	}
 }
 
-/* Returns a colred image of the same size as the window */
+	Returns a colred image of the same size as the window
 void	*new_panel(t_game *game, t_color color)
 {
 	t_panel	panel;
-
 	panel.pointer = mlx_new_image(game->mlx,
 			WIN_WIDTH, WIN_HEIGHT);
 	panel.size.x = WIN_WIDTH;
@@ -70,3 +73,4 @@ void	*new_panel(t_game *game, t_color color)
 	color_panel(&panel, color);
 	return (panel.pointer);
 }
+*/

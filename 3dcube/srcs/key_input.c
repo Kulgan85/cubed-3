@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/24 16:18:55 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:32:29 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ int	key_input(int key, void *param)
 		move_guy(key, game);
 	printf("key pressed - %d\n", key);
 	return (0);
-}
-
-void	move_guy(int key, t_game *game)
-{
-	if (key == KEY_W)
-		move_forward(game);
-	if (key == KEY_S)
-		move_backward(game);
-	if (key == KEY_A)
-		game->doom_guy.x -= 0.1;
-	if (key == KEY_D)
-		game->doom_guy.x += 0.1;
-	printf("Doomguy x: %f, Doomguy y: %f\n", game->doom_guy.x, game->doom_guy.y);
 }
 
 void	move_forward(t_game *game)
@@ -86,14 +73,17 @@ void	strafe_right(t_game *game)
 		+ strafedir.y * game->doom_guy.speed;
 }
 
-void	rotate_guy(int key, t_game *game)
+void	move_guy(int key, t_game *game)
 {
-	if (key == KEY_RIGHT)
-		do_rotate(game->doom_guy.direction, (PI / 8) * -1);
-	if (key == KEY_LEFT)
-		do_rotate(game->doom_guy.direction, PI / 8);
-	printf("Doomguy angle: %f,%f\n", game->doom_guy.direction.x,
-		game->doom_guy.direction.y);
+	if (key == KEY_W)
+		move_forward(game);
+	if (key == KEY_S)
+		move_backward(game);
+	if (key == KEY_A)
+		strafe_left(game);
+	if (key == KEY_D)
+		strafe_right(game);
+	printf("Doomguy x: %f, Doomguy y: %f\n", game->doom_guy.x, game->doom_guy.y);
 }
 
 t_pvector	do_rotate(t_pvector vector, double rotate)
@@ -116,6 +106,16 @@ t_pvector	do_rotate(t_pvector vector, double rotate)
 		new.y = 0;
 		return (new);
 	}
+}
+
+void	rotate_guy(int key, t_game *game)
+{
+	if (key == KEY_RIGHT)
+		do_rotate(game->doom_guy.direction, (PI / 8) * -1);
+	if (key == KEY_LEFT)
+		do_rotate(game->doom_guy.direction, PI / 8);
+	printf("Doomguy angle: %f,%f\n", game->doom_guy.direction.x,
+		game->doom_guy.direction.y);
 }
 
 /*

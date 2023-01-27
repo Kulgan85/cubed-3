@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/24 13:52:43 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/01/27 11:44:09 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	main(int argc, char **argv)
 	game.tilemap = generate_tilemap(&game);
 	init_player(&game);
 	init_image(&game);
-	printf("test\n");
-	printf("bad mlx\n");
+	printf("pre drawing bg\n");
 	draw_bg(&game);
+	printf("BG good\n");
 	set_mlx_hooks(&game);
 	mlx_loop(game.mlx);
 }
