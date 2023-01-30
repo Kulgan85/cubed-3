@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/30 10:27:42 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:44:23 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,15 @@ void	move_guy(int key, t_game *game)
 	printf("Doomguy x: %f, Doomguy y: %f\n", game->doom_guy.x, game->doom_guy.y);
 }
 
-t_pvector	do_rotate(t_pvector vector, double rotate, char *direction)
+t_pvector	do_rotate(t_pvector vector, double rotate)
 {
 	t_pvector	new;
 	double		length;
 
-	if (ft_strncmp(direction, "right", 6) == 0)
-	{
-		new.x = (vector.x * cos(rotate)) + (vector.y * sin(rotate));
-		printf("x: %f\n", new.x);
-		new.y = (vector.x * cos(rotate)) - (vector.y * sin(rotate));
-		printf("y: %f\n", new.y);
-	}
-	else if (ft_strncmp(direction, "left", 5) == 0)
-	{
-		new.x = (vector.x * cos(rotate)) - (vector.y * sin(rotate));
-		printf("x: %f\n", new.x);
-		new.y = (vector.x * cos(rotate)) + (vector.y * sin(rotate));
-		printf("y: %f\n", new.y);
-	}
+	new.x = (vector.x * cos(rotate)) - (vector.y * sin(rotate));
+	printf("x: %f\n", new.x);
+	new.y = (vector.x * sin(rotate)) + (vector.y * cos(rotate));
+	printf("y: %f\n", new.y);
 	length = sqrt(new.x * new.x + new.y * new.y);
 	printf("The length is: %f\n", length);
 	if (length != 0)
@@ -129,12 +119,12 @@ void	rotate_guy(int key, t_game *game)
 	{
 		printf("doing rotate!\n");
 		game->doom_guy.direction = do_rotate(game->doom_guy.direction,
-				((PI * -1) / 8), "right");
+				((PI / 8) * -1));
 		printf("Doom_Guy was rotated!\n");
 	}
 	if (key == KEY_LEFT)
 		game->doom_guy.direction = do_rotate(game->doom_guy.direction,
-				PI / 8, "left");
+				PI / 8);
 	printf("Doomguy angle: %f,%f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
 }
