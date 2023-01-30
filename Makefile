@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/24 16:21:28 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/01/30 11:41:16 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ FILES = main.c \
 		map_file_check.c \
 		map_file_check_utils.c \
 		mlx_hooks.c \
+		movement.c \
+		raycasting.c \
 		tilemap_generator.c \
 
 OBJS_NAME = $(FILES:.c=.o)

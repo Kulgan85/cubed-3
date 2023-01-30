@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/27 11:29:48 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:43:07 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,7 @@ void		init_other(t_game *game);
 /* key_input.c */
 int			key_input(int key, void *param);
 void		move_guy(int key, t_game *game);
+t_pvector	do_rotate(t_pvector vector, double rotate);
 void		rotate_guy(int key, t_game *game);
 
 /* map_check_utils.c */
@@ -216,6 +217,12 @@ int			set_colors(int i, char *file, t_game *game, int id);
 
 /* mlx_hooks.c */
 void		set_mlx_hooks(t_game *game);
+
+/* movement.c */
+void		move_forward(t_game *game);
+void		move_backward(t_game *game);
+void		strafe_left(t_game *game);
+void		strafe_right(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);

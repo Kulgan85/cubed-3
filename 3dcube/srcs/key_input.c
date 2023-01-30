@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/30 10:53:24 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 11:40:24 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,49 +29,6 @@ int	key_input(int key, void *param)
 		move_guy(key, game);
 	printf("key pressed - %d\n", key);
 	return (0);
-}
-
-void	move_forward(t_game *game)
-{
-	printf("Moving forward toward %f at a speed of %f\n", game->doom_guy.direction.x, game->doom_guy.speed);
-	game->doom_guy.x += (game->doom_guy.direction.x * game->doom_guy.speed);
-	game->doom_guy.y += (game->doom_guy.direction.y * game->doom_guy.speed);
-}
-
-void	move_backward(t_game *game)
-{
-	game->doom_guy.x -= game->doom_guy.direction.x * game->doom_guy.speed;
-	game->doom_guy.y -= game->doom_guy.direction.y * game->doom_guy.speed;
-}
-
-void	strafe_left(t_game *game)
-{
-	t_pvector	strafedir;
-	double		angle;
-
-	angle = atan2(game->doom_guy.direction.x, game->doom_guy.direction.y)
-		+ PI / 2;
-	strafedir.x = cos(angle) * 1;
-	strafedir.y = cos(angle) * 1;
-	game->doom_guy.x += game->doom_guy.direction.x * game->doom_guy.speed
-		+ strafedir.x * game->doom_guy.speed;
-	game->doom_guy.y += game->doom_guy.direction.y * game->doom_guy.speed
-		+ strafedir.y * game->doom_guy.speed;
-}
-
-void	strafe_right(t_game *game)
-{
-	t_pvector	strafedir;
-	double		angle;
-
-	angle = atan2(game->doom_guy.direction.x, game->doom_guy.direction.y)
-		+ PI / 2;
-	strafedir.x = cos(angle) * -1;
-	strafedir.y = cos(angle) * -1;
-	game->doom_guy.x += game->doom_guy.direction.x * game->doom_guy.speed
-		+ strafedir.x * game->doom_guy.speed;
-	game->doom_guy.y += game->doom_guy.direction.y * game->doom_guy.speed
-		+ strafedir.y * game->doom_guy.speed;
 }
 
 void	move_guy(int key, t_game *game)
@@ -128,18 +85,3 @@ void	rotate_guy(int key, t_game *game)
 	printf("Doomguy angle: %f,%f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
 }
-
-/*
-void	rotate_guy(int key, t_game *game)
-{
-	if (key == KEY_RIGHT)
-		game->doom_guy.direction += 5;
-	if (key == KEY_LEFT)
-		game->doom_guy.direction -= 5;
-	if (game->doom_guy.direction >= 360)
-		game->doom_guy.direction -= 360;
-	else if (game->doom_guy.direction < 0)
-		game->doom_guy.direction += 360;
-	printf("Doomguy angle: %f\n", game->doom_guy.direction);
-}
-*/
