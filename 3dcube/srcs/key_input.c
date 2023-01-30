@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/27 10:32:29 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:27:42 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ int	key_input(int key, void *param)
 
 void	move_forward(t_game *game)
 {
-	game->doom_guy.x += game->doom_guy.direction.x * game->doom_guy.speed;
-	game->doom_guy.y += game->doom_guy.direction.y * game->doom_guy.speed;
+	printf("Moving forward toward %f at a speed of %f\n", game->doom_guy.direction.x, game->doom_guy.speed);
+	game->doom_guy.x += (game->doom_guy.direction.x * game->doom_guy.speed);
+	game->doom_guy.y += (game->doom_guy.direction.y * game->doom_guy.speed);
 }
 
 void	move_backward(t_game *game)
@@ -86,14 +87,27 @@ void	move_guy(int key, t_game *game)
 	printf("Doomguy x: %f, Doomguy y: %f\n", game->doom_guy.x, game->doom_guy.y);
 }
 
-t_pvector	do_rotate(t_pvector vector, double rotate)
+t_pvector	do_rotate(t_pvector vector, double rotate, char *direction)
 {
 	t_pvector	new;
 	double		length;
 
-	new.x = vector.x * cos(rotate) - vector.y * sin(rotate);
-	new.y = vector.x * cos(rotate) + vector.y * sin(rotate);
+	if (ft_strncmp(direction, "right", 6) == 0)
+	{
+		new.x = (vector.x * cos(rotate)) + (vector.y * sin(rotate));
+		printf("x: %f\n", new.x);
+		new.y = (vector.x * cos(rotate)) - (vector.y * sin(rotate));
+		printf("y: %f\n", new.y);
+	}
+	else if (ft_strncmp(direction, "left", 5) == 0)
+	{
+		new.x = (vector.x * cos(rotate)) - (vector.y * sin(rotate));
+		printf("x: %f\n", new.x);
+		new.y = (vector.x * cos(rotate)) + (vector.y * sin(rotate));
+		printf("y: %f\n", new.y);
+	}
 	length = sqrt(new.x * new.x + new.y * new.y);
+	printf("The length is: %f\n", length);
 	if (length != 0)
 	{
 		new.x /= length;
@@ -106,14 +120,21 @@ t_pvector	do_rotate(t_pvector vector, double rotate)
 		new.y = 0;
 		return (new);
 	}
+	printf("End of rotation\n");
 }
 
 void	rotate_guy(int key, t_game *game)
 {
 	if (key == KEY_RIGHT)
-		do_rotate(game->doom_guy.direction, (PI / 8) * -1);
+	{
+		printf("doing rotate!\n");
+		game->doom_guy.direction = do_rotate(game->doom_guy.direction,
+				((PI * -1) / 8), "right");
+		printf("Doom_Guy was rotated!\n");
+	}
 	if (key == KEY_LEFT)
-		do_rotate(game->doom_guy.direction, PI / 8);
+		game->doom_guy.direction = do_rotate(game->doom_guy.direction,
+				PI / 8, "left");
 	printf("Doomguy angle: %f,%f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
 }
