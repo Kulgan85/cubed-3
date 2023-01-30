@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 15:02:38 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:13:45 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_camera_plane(t_game *game, t_ray rayban)
 
 void	init_other(t_game *game)
 {
-	game->doom_guy.fov = 60;
 	game->doom_guy.height = 32;
 	game->doom_guy.speed = 0.5;
 }

@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 17:04:44 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:13:27 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	draw_wall(t_game *game, int x, t_rayhit *x_ray)
 	int	wall_width;
 
 	printf("wall distance: %f\n", x_ray->wall_distance);
-	wall_height = x_ray->wall_distance * fabs(tan(FOV / 2) * 2);
+	wall_height = WIN_HEIGHT / x_ray->wall_distance;
 	printf("wall height: %i\n", wall_height);
 	wall_position_y = (WIN_HEIGHT / 2) - (wall_height / 2);
 	wall_width = wall_height * 1.78;
