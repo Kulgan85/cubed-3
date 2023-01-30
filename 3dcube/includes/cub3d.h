@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 11:43:07 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 13:44:52 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,11 +138,11 @@ typedef struct s_player
 	int			fov;
 	int			height;
 	t_pvector	direction;
+	t_pvector	strafe;
 	double		speed;
 	double		x;
 	double		y;
 	double		rad;
-//	double		direction;
 	double		rangle;
 }	t_player;
 
