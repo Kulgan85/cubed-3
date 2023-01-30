@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/30 10:44:23 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 10:53:24 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	key_input(int key, void *param)
 
 	game = (t_game *)param;
 	if (key == KEY_ESC)
-		printf("Esc Key\n");
+		close_win(game);
 	else if (key == KEY_UP)
-		printf("Arrow Up Key\n");
+		move_guy(key, game);
 	else if (key == KEY_DOWN)
-		printf("Arrow Down Key\n");
+		move_guy(key, game);
 	else if (key == KEY_LEFT || key == KEY_RIGHT)
 		rotate_guy(key, game);
 	else if (key == KEY_W || key == KEY_S || key == KEY_D || key == KEY_A)
@@ -76,9 +76,9 @@ void	strafe_right(t_game *game)
 
 void	move_guy(int key, t_game *game)
 {
-	if (key == KEY_W)
+	if (key == KEY_W || key == KEY_UP)
 		move_forward(game);
-	if (key == KEY_S)
+	if (key == KEY_S || key == KEY_DOWN)
 		move_backward(game);
 	if (key == KEY_A)
 		strafe_left(game);
