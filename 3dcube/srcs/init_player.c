@@ -6,18 +6,29 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 13:38:38 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:02:38 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_camera_plane(t_game *game, t_ray rayban)
+{
+	rayban.camera_distance = 0.5;
+	game->doom_guy.player_angle = atan2(game->doom_guy.direction.y,
+			game->doom_guy.direction.x);
+	rayban.camera_plane_x = -sin(game->doom_guy.player_angle);
+	rayban.camera_plane_x_pos = game->doom_guy.x + rayban.camera_plane_x
+		* rayban.camera_distance;
+	rayban.camera_plane_y = cos(game->doom_guy.player_angle);
+	rayban.camera_plane_y_pos = game->doom_guy.y + rayban.camera_plane_y
+		* rayban.camera_distance;
+}
+
 void	init_other(t_game *game)
 {
 	game->doom_guy.fov = 60;
 	game->doom_guy.height = 32;
-	game->doom_guy.rad = 0;
-	game->doom_guy.rangle = 0;
 	game->doom_guy.speed = 0.5;
 }
 

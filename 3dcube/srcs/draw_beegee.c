@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:25:09 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/27 12:04:57 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:05:35 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	draw_bg(t_game *game)
 		//printf("loop counter: %i\n", i);
 	}
 	//printf("2nd new image[i] is good\n");
-	mlx_put_image_to_window(game->mlx, game->mlx_window,
-		game->img->pointer, 0, 0);
+	//mlx_put_image_to_window(game->mlx, game->mlx_window,
+	//	game->img->pointer, 0, 0);
 }
 
 int	create_rgb(int r, int g, int b)

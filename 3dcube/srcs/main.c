@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/27 11:44:09 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 15:54:32 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ int	main(int argc, char **argv)
 	init_image(&game);
 	printf("pre drawing bg\n");
 	draw_bg(&game);
+	printf("pre raycast\n");
+	raycast(&game);
+	printf("post raycast\n");
+	mlx_put_image_to_window(game.mlx, game.mlx_window, game.img->pointer, 0, 0);
 	printf("BG good\n");
 	set_mlx_hooks(&game);
 	mlx_loop(game.mlx);

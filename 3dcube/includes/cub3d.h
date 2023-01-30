@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 13:44:52 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/01/30 16:38:32 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ MLX window settings
 # define WIN_WIDTH		1280
 # define WIN_HEIGHT		720
 # define WIN_TITLE		"cub3d"
+# define WALL_HEIGHT	128
+# define FOV			60
 
 /*
 MLX Key codes
@@ -135,16 +137,35 @@ typedef struct s_mapdata
 /* Player Struct */
 typedef struct s_player
 {
-	int			fov;
 	int			height;
 	t_pvector	direction;
 	t_pvector	strafe;
 	double		speed;
 	double		x;
 	double		y;
-	double		rad;
-	double		rangle;
+	// double		rad;
+	// double		rangle;
+	double		player_angle;
 }	t_player;
+
+/* Ray Struct */
+typedef struct s_ray
+{
+	double	camera_plane_x;
+	double	camera_plane_y;
+	double	camera_plane_x_pos;
+	double	camera_plane_y_pos;
+	double	camera_distance;
+}	t_ray;
+
+/* hitray Struct */
+typedef struct s_rayhit
+{
+	double	wall_distance;
+	double	wall_normal;
+	char	*wall_texture;
+	int		wall_colour;
+}	t_rayhit;
 
 /* Main Struct */
 typedef struct s_game
@@ -157,6 +178,7 @@ typedef struct s_game
 	t_mapdata	mapdata;
 	char		**file;
 	t_player	doom_guy;
+	t_ray		rayban;
 }	t_game;
 
 /* close_game.c */
@@ -223,6 +245,9 @@ void		move_forward(t_game *game);
 void		move_backward(t_game *game);
 void		strafe_left(t_game *game);
 void		strafe_right(t_game *game);
+
+/* raycast.c */
+void		raycast(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);
