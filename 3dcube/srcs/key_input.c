@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/30 14:00:06 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:25:26 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@ void	rotate_guy(int key, t_game *game)
 	{
 		printf("doing rotate!\n");
 		game->doom_guy.direction = do_rotate(game->doom_guy.direction,
-				((PI / 8) * -1));
+				((PI / 24) * -1));
 		game->doom_guy.strafe = do_rotate(game->doom_guy.strafe,
-				((PI / 8) * -1));
+				((PI / 24) * -1));
 		printf("Doom_Guy was rotated!\n");
 	}
 	if (key == KEY_LEFT)
-		game->doom_guy.direction = do_rotate(game->doom_guy.direction, PI / 8);
-		game->doom_guy.strafe = do_rotate(game->doom_guy.strafe, PI / 8);
+		game->doom_guy.direction = do_rotate(game->doom_guy.direction, PI / 24);
+		game->doom_guy.strafe = do_rotate(game->doom_guy.strafe, PI / 24);
 	printf("Doomguy angle: %f,%f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
 }

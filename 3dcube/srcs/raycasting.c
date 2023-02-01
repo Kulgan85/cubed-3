@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 17:13:27 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:27:45 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,135 @@ static void	put_pixel(t_images *image, int x, int y, int colour)
 	}
 }
 
+t_rayhit	shoot_ray(t_game *game, t_ray *ray_stuff)
+{
+	t_rayhit	beam;
+	int			hit;
+	int			beam_pos_x;
+	int			beam_pos_y;
+	int			step_x;
+	int			step_y;
+
+	hit = 0;
+	beam_pos_x = (int)game->doom_guy.x;
+	beam_pos_y = (int)game->doom_guy.y;
+	if (ray_stuff->ray_dir_x < 0)
+	{
+		step_x = -1;
+		ray_stuff->side_dist_x = (game->doom_guy.x - beam_pos_x)
+			* ray_stuff->delta_dist_x;
+	}
+	else
+	{
+		step_x = 1;
+		ray_stuff->side_dist_x = (beam_pos_x + 1 - game->doom_guy.x)
+			* ray_stuff->delta_dist_x;
+	}
+	if (ray_stuff->ray_dir_y < 0)
+	{
+		step_y = -1;
+		ray_stuff->side_dist_y = (beam_pos_y - game->doom_guy.y)
+			* ray_stuff->delta_dist_y;
+	}
+	else
+	{
+		step_y = 1;
+		ray_stuff->side_dist_y = (beam_pos_y + 1 - game->doom_guy.y)
+			* ray_stuff->delta_dist_y;
+	}
+	while (!hit)
+	{
+		if (ray_stuff->side_dist_x < ray_stuff->side_dist_y)
+		{
+			ray_stuff->side_dist_x += ray_stuff->delta_dist_x;
+			beam_pos_x += step_x;
+			beam.side = 0;
+		}
+		else
+		{
+			ray_stuff->side_dist_y += ray_stuff->delta_dist_y;
+			beam_pos_y += step_y;
+			beam.side = 1;
+		}
+		if (game->tilemap[beam_pos_y][beam_pos_x].type == WALL)
+			hit = 1;
+	}
+	if (beam.side == 0)
+		beam.wall_distance = (ray_stuff->side_dist_x - ray_stuff->delta_dist_x);
+	else
+		beam.wall_distance = (ray_stuff->side_dist_y - ray_stuff->delta_dist_y);
+	return (beam);
+}
+
+void	draw_wall(t_game *game, t_rayhit *hit, int x)
+{
+	int			i;
+	int			colour;
+	int			wallheight;
+	int			draw_start;
+	int			draw_end;
+
+	wallheight = (int)(WIN_HEIGHT / hit->wall_distance);
+	draw_start = -wallheight / 2 + WIN_HEIGHT / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = wallheight / 2 + WIN_HEIGHT / 2;
+	if (draw_end >= WIN_HEIGHT)
+		draw_end = WIN_HEIGHT - 1;
+	i = draw_start;
+	if (hit->side == 0)
+		colour = create_rgb(255, 0, 0);
+	else
+		colour = create_rgb(128, 0, 0);
+	while (i < draw_end)
+	{
+		put_pixel(game->img, x, i, colour);
+		i++;
+	}
+}
+
+void	raycast(t_game *game)
+{
+	int			ray;
+	double		camera_x;
+	t_ray		ray_stuff;
+	t_rayhit	shotray;
+
+	ray = 0;
+	while (ray < WIN_WIDTH)
+	{
+		camera_x = 2 * ray / (double)WIN_WIDTH - 1;
+		ray_stuff.ray_dir_x = game->doom_guy.direction.x
+			+ game->doom_guy.direction.y * (camera_x / 2);
+		ray_stuff.ray_dir_y = game->doom_guy.direction.y
+			- game->doom_guy.direction.x * (camera_x / 2);
+		ray_stuff.ray_x = game->doom_guy.x + ray_stuff.ray_dir_x;
+		ray_stuff.ray_y = game->doom_guy.y + ray_stuff.ray_dir_y;
+		if (ray_stuff.ray_dir_x == 0)
+			ray_stuff.delta_dist_x = 1e30;
+		else
+			ray_stuff.delta_dist_x = fabs(1 / ray_stuff.ray_dir_x);
+		if (ray_stuff.ray_dir_y == 0)
+			ray_stuff.delta_dist_y = 1e30;
+		else
+			ray_stuff.delta_dist_y = fabs(1 / ray_stuff.ray_dir_y);
+		shotray = shoot_ray(game, &ray_stuff);
+		draw_wall(game, &shotray, ray);
+		ray++;
+	}
+	return ;
+}
+
+int	redraw_screen(t_game *game)
+{
+	draw_bg(game);
+	raycast(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_window,
+		game->img->pointer, 0, 0);
+	return (0);
+}
+
+/*
 t_rayhit	cast_ray(t_game *game, double ray_dir_x, double ray_dir_y, t_rayhit *ray_hit)
 {
 	int			length;
@@ -121,3 +250,4 @@ void	raycast(t_game *game)
 		i++;
 	}
 }
+*/

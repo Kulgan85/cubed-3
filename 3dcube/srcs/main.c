@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/30 15:54:32 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:34:30 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv)
 	printf("post raycast\n");
 	mlx_put_image_to_window(game.mlx, game.mlx_window, game.img->pointer, 0, 0);
 	printf("BG good\n");
-	set_mlx_hooks(&game);
+	set_mlx_hooks(&game);	
+	mlx_loop_hook(game.mlx, redraw_screen, &game);
 	mlx_loop(game.mlx);
 }

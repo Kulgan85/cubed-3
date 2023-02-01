@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 16:38:32 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:27:23 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ MLX Key codes
 Math schidt
 */
 # define PI				3.142857
+
+/*
+FOV
+*/
+# define FOV			60
 
 /* Tile Types */
 typedef enum e_tiletype
@@ -145,22 +150,31 @@ typedef struct s_player
 	double		y;
 	// double		rad;
 	// double		rangle;
-	double		player_angle;
+	//double		player_angle;
 }	t_player;
 
 /* Ray Struct */
 typedef struct s_ray
 {
-	double	camera_plane_x;
-	double	camera_plane_y;
-	double	camera_plane_x_pos;
-	double	camera_plane_y_pos;
-	double	camera_distance;
+	// double	camera_plane_x;
+	// double	camera_plane_y;
+	// double	camera_plane_x_pos;
+	// double	camera_plane_y_pos;
+	//double	camera_distance;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	double		ray_x;
+	double		ray_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
 }	t_ray;
 
 /* hitray Struct */
 typedef struct s_rayhit
 {
+	int		side;
 	double	wall_distance;
 	double	wall_normal;
 	char	*wall_texture;
@@ -248,6 +262,7 @@ void		strafe_right(t_game *game);
 
 /* raycast.c */
 void		raycast(t_game *game);
+int			redraw_screen(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);

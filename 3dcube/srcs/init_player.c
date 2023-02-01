@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/30 17:13:45 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/01 16:22:08 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/*
 void	init_camera_plane(t_game *game, t_ray rayban)
 {
 	rayban.camera_distance = 0.5;
@@ -24,11 +25,12 @@ void	init_camera_plane(t_game *game, t_ray rayban)
 	rayban.camera_plane_y_pos = game->doom_guy.y + rayban.camera_plane_y
 		* rayban.camera_distance;
 }
+*/
 
 void	init_other(t_game *game)
 {
 	game->doom_guy.height = 32;
-	game->doom_guy.speed = 0.5;
+	game->doom_guy.speed = 0.1;
 }
 
 void	init_dir(t_game *game, int y, int x)
