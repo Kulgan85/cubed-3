@@ -14,3 +14,5 @@ https://permadi.com/1996/05/ray-casting-tutorial-3/
 https://github.com/vinibiavatti1/RayCastingTutorial
 
 https://github.com/Mampacuk/cub3d/blob/main/mlx_utils.c
+
+https://github.com/phperrot/cub3d
