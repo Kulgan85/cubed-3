@@ -1,14 +1,14 @@
-NO ./nofile_goes_here
-SO ./sofile_goes_here
-WE ./wefile_goes_here
-EA ./eafile_goes_here
+NO ../textures/Wood_Plank_Shelf_tile_128x128.xpm
+SO ../textures/Wood_Plank_Shelf_Hat_tile_128x128.xpm
+WE ../textures/Wood_Plank_tile_128x128.xpm
+EA ../textures/Wood_Plank_Banner_tile_128x128.xpm
 
 F 200,200,200
 C 100,100,100
 
 11111111111111111   
 10000000000000001111
-10S01110111111100001
+10E01110111111100001
 100000101     100001
 10001010111   100001
 10011010001   100001
