@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/02 12:48:03 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/02 15:03:48 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ t_rayhit	shoot_ray(t_game *game, t_ray *ray_stuff)
 	else
 	{
 		step_x = 1;
-		ray_stuff->side_dist_x = (beam_pos_x + 1 - game->doom_guy.x)
+		ray_stuff->side_dist_x = (beam_pos_x + 1.0 - game->doom_guy.x)
 			* ray_stuff->delta_dist_x;
 	}
 	if (ray_stuff->ray_dir_y < 0)
 	{
 		step_y = -1;
-		ray_stuff->side_dist_y = (beam_pos_y - game->doom_guy.y)
+		ray_stuff->side_dist_y = (game->doom_guy.y - beam_pos_y)
 			* ray_stuff->delta_dist_y;
 	}
 	else
@@ -100,6 +100,8 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 	draw_end = wallheight / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
+	
+	// where texturing walls goes
 	i = draw_start;
 	if (hit->side == 0)
 		colour = create_rgb(255, 0, 0);
@@ -127,8 +129,8 @@ void	raycast(t_game *game)
 			+ game->doom_guy.direction.y * (camera_x / 2);
 		ray_stuff.ray_dir_y = game->doom_guy.direction.y
 			- game->doom_guy.direction.x * (camera_x / 2);
-		ray_stuff.ray_x = game->doom_guy.x + ray_stuff.ray_dir_x;
-		ray_stuff.ray_y = game->doom_guy.y + ray_stuff.ray_dir_y;
+		ray_stuff.ray_x = game->doom_guy.direction.x + ray_stuff.ray_dir_x;
+		ray_stuff.ray_y = game->doom_guy.direction.y + ray_stuff.ray_dir_y;
 		if (ray_stuff.ray_dir_x == 0)
 			ray_stuff.delta_dist_x = 1e30;
 		else
