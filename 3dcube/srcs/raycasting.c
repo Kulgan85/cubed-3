@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/02 15:03:48 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/02 16:25:03 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,23 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 	draw_end = wallheight / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	
-	// where texturing walls goes
+	//START THE TEXTURES
+	// - y = south wall
+	// + y = north wall
+	// - x = west wall
+	// + x = east wall
+	//hit->side == 0: hit a North or South wall
+	//hit->side == 1: hit a East or West wall
+	if (hit->side == 0 && game->doom_guy.direction.y < 0)
+		//texture == southwall;
+	else if (hit->side == 0 && game->doom_guy.direction.y > 0)
+		//texture == northwall;
+	if (hit->side == 1 && game->doom_guy.direction.x < 0)
+		//texture == westwall;
+	else if (hit->side == 1 && game->doom_guy.direction.x > 0)
+		//texture == eastwall;
+	//draw wall with texture
+
 	i = draw_start;
 	if (hit->side == 0)
 		colour = create_rgb(255, 0, 0);
