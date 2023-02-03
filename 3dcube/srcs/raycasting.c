@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/02 16:25:03 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/03 12:38:54 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,12 @@ t_rayhit	shoot_ray(t_game *game, t_ray *ray_stuff)
 	return (beam);
 }
 
+	// - y = south wall
+	// + y = north wall
+	// - x = west wall
+	// + x = east wall
+	// hit->side == 0: hit a North or South wall
+	// hit->side == 1: hit a East or West wall
 void	draw_wall(t_game *game, t_rayhit *hit, int x)
 {
 	int			i;
@@ -100,23 +106,9 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 	draw_end = wallheight / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	//START THE TEXTURES
-	// - y = south wall
-	// + y = north wall
-	// - x = west wall
-	// + x = east wall
-	//hit->side == 0: hit a North or South wall
-	//hit->side == 1: hit a East or West wall
-	if (hit->side == 0 && game->doom_guy.direction.y < 0)
-		//texture == southwall;
-	else if (hit->side == 0 && game->doom_guy.direction.y > 0)
-		//texture == northwall;
-	if (hit->side == 1 && game->doom_guy.direction.x < 0)
-		//texture == westwall;
-	else if (hit->side == 1 && game->doom_guy.direction.x > 0)
-		//texture == eastwall;
-	//draw wall with texture
-
+	if (!(texture_picker(game, &hit)))
+		print_error(3, "Error with the textures");
+	
 	i = draw_start;
 	if (hit->side == 0)
 		colour = create_rgb(255, 0, 0);
@@ -127,6 +119,18 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 		put_pixel(game->img, x, i, colour);
 		i++;
 	}
+}
+
+int	texture_picker(t_game *game, t_rayhit *hit)
+{
+	if (hit->side == 0 && game->doom_guy.direction.y < 0)
+		draw(game->mapdata.so);
+	else if (hit->side == 0 && game->doom_guy.direction.y > 0)
+		draw(game->mapdata.no);
+	if (hit->side == 1 && game->doom_guy.direction.x < 0)
+		draw(game->mapdata.we);
+	else if (hit->side == 1 && game->doom_guy.direction.x > 0)
+		draw(game->mapdata.ea);
 }
 
 void	raycast(t_game *game)
