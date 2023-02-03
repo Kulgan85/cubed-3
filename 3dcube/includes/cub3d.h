@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/03 13:21:19 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/03 16:29:33 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ MLX window settings
 # define WIN_TITLE		"cub3d"
 # define WALL_HEIGHT	128
 # define FOV			60
+# define TEX_WIDTH		128
+# define TEX_HEIGHT		128
 
 /*
 MLX Key codes
@@ -138,6 +140,15 @@ typedef struct s_mapdata
 	int		max_width;
 	int		max_height;
 }	t_mapdata;
+
+/* Struct that is used for texturing the walls */
+typedef struct s_exture_wall
+{
+	double	x;
+	double	y;
+	double	dx;
+	double	dy;
+}	t_exture_wall;
 
 /* Player Struct */
 typedef struct s_player

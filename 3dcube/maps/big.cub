@@ -1,0 +1,15 @@
+NO ../textures/Wood_Plank_Shelf_tile_128x128.xpm
+SO ../textures/Wood_Plank_Shelf_Hat_tile_128x128.xpm
+WE ../textures/Wood_Plank_tile_128x128.xpm
+EA ../textures/Wood_Plank_Banner_tile_128x128.xpm
+
+F 200,200,200
+C 100,100,100
+
+111111111
+100000001
+10000E001
+100000001
+100000001
+100000001
+111111111
