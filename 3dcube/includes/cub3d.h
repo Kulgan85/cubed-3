@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/01 16:27:23 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:21:19 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,12 @@ typedef struct s_player
 	// double		rad;
 	// double		rangle;
 	//double		player_angle;
+	int			ismovef;
+	int			ismoveb;
+	int			isstrl;
+	int			isstrr;
+	int			isrotl;
+	int			isrotr;
 }	t_player;
 
 /* Ray Struct */
@@ -218,9 +224,14 @@ void		init_other(t_game *game);
 
 /* key_input.c */
 int			key_input(int key, void *param);
+int			key_release(int key, void *param);
 void		move_guy(int key, t_game *game);
 t_pvector	do_rotate(t_pvector vector, double rotate);
-void		rotate_guy(int key, t_game *game);
+void		rotate_right(t_game *game);
+void		rotate_left(t_game *game);
+
+/* loops.c */
+int			main_loop(t_game *game);
 
 /* map_check_utils.c */
 void		free_2d_array(char **array);
@@ -255,6 +266,7 @@ int			set_colors(int i, char *file, t_game *game, int id);
 void		set_mlx_hooks(t_game *game);
 
 /* movement.c */
+int			move_loop(t_game *game);
 void		move_forward(t_game *game);
 void		move_backward(t_game *game);
 void		strafe_left(t_game *game);
@@ -262,7 +274,6 @@ void		strafe_right(t_game *game);
 
 /* raycast.c */
 void		raycast(t_game *game);
-int			redraw_screen(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);

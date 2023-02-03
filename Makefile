@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
+#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/01/30 11:41:16 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/02/03 13:21:43 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ FILES = main.c \
 		init_mlx.c \
 		init_player.c \
 		key_input.c \
+		loops.c \
 		map_check.c \
 		map_check_utils.c \
 		map_check_utils2.c \

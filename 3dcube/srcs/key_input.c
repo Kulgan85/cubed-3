@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_input.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/02 12:19:44 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:23:40 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,41 @@ int	key_input(int key, void *param)
 	t_game		*game;
 
 	game = (t_game *)param;
+	if (key == KEY_UP || key == KEY_W)
+		game->doom_guy.ismovef = 1;
+	if (key == KEY_DOWN || key == KEY_S)
+		game->doom_guy.ismoveb = 1;
+	if (key == KEY_LEFT)
+		game->doom_guy.isrotl = 1;
+	if (key == KEY_RIGHT)
+		game->doom_guy.isrotr = 1;
+	if (key == KEY_A)
+		game->doom_guy.isstrl = 1;
+	if (key == KEY_D)
+		game->doom_guy.isstrr = 1;
+	printf("key pressed - %d\n", key);
+	return (0);
+}
+
+int	key_release(int key, void *param)
+{
+	t_game		*game;
+
+	game = (t_game *)param;
 	if (key == KEY_ESC)
 		close_win(game);
-	else if (key == KEY_UP)
-		move_guy(key, game);
-	else if (key == KEY_DOWN)
-		move_guy(key, game);
-	else if (key == KEY_LEFT || key == KEY_RIGHT)
-		rotate_guy(key, game);
-	else if (key == KEY_W || key == KEY_S || key == KEY_D || key == KEY_A)
-		move_guy(key, game);
-	printf("key pressed - %d\n", key);
+	if (key == KEY_UP || key == KEY_W)
+		game->doom_guy.ismovef = 0;
+	if (key == KEY_DOWN || key == KEY_S)
+		game->doom_guy.ismoveb = 0;
+	if (key == KEY_LEFT)
+		game->doom_guy.isrotl = 0;
+	if (key == KEY_RIGHT)
+		game->doom_guy.isrotr = 0;
+	if (key == KEY_A)
+		game->doom_guy.isstrl = 0;
+	if (key == KEY_D)
+		game->doom_guy.isstrr = 0;
 	return (0);
 }
 
@@ -70,25 +94,28 @@ t_pvector	do_rotate(t_pvector vector, double rotate)
 	printf("End of rotation\n");
 }
 
-void	rotate_guy(int key, t_game *game)
+void	rotate_right(t_game *game)
 {
-	if (key == KEY_RIGHT)
-	{
-		printf("doing rotate!\n");
-		game->doom_guy.direction = do_rotate(game->doom_guy.direction,
-				((PI / 24) * -1));
-		printf("Doom_Guy was rotated!\n");
-		game->doom_guy.strafe = do_rotate(game->doom_guy.strafe,
-				((PI / 24) * -1));
-		printf("Strafe direction was rotated!\n");
-	}
-	if (key == KEY_LEFT)
-	{
-		game->doom_guy.direction = do_rotate(game->doom_guy.direction, PI / 24);
-		printf("Doom_Guy was rotated!\n");
-		game->doom_guy.strafe = do_rotate(game->doom_guy.strafe, PI / 24);
-		printf("Strafe direction was rotated!\n");
-	}
+	printf("doing rotate!\n");
+	game->doom_guy.direction = do_rotate(game->doom_guy.direction,
+			((PI / 24) * -1));
+	printf("Doom_Guy was rotated!\n");
+	game->doom_guy.strafe = do_rotate(game->doom_guy.strafe,
+			((PI / 24) * -1));
+	printf("Strafe direction was rotated!\n");
+	printf("Doomguy angle: %f, %f\n", game->doom_guy.direction.x,
+		game->doom_guy.direction.y);
+	printf("Strafe angle: %f, %f\n", game->doom_guy.strafe.x,
+		game->doom_guy.strafe.y);
+}
+
+void	rotate_left(t_game *game)
+{
+	printf("doing rotate!\n");
+	game->doom_guy.direction = do_rotate(game->doom_guy.direction, PI / 24);
+	printf("Doom_Guy was rotated!\n");
+	game->doom_guy.strafe = do_rotate(game->doom_guy.strafe, PI / 24);
+	printf("Strafe direction was rotated!\n");
 	printf("Doomguy angle: %f, %f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
 	printf("Strafe angle: %f, %f\n", game->doom_guy.strafe.x,

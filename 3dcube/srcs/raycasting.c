@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/03 12:38:54 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:00:40 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,15 +163,6 @@ void	raycast(t_game *game)
 		ray++;
 	}
 	return ;
-}
-
-int	redraw_screen(t_game *game)
-{
-	draw_bg(game);
-	raycast(game);
-	mlx_put_image_to_window(game->mlx, game->mlx_window,
-		game->img->pointer, 0, 0);
-	return (0);
 }
 
 /*

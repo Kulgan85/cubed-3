@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_hooks.c                                        :+:      :+:    :+:   */
+/*   loops.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 20:00:52 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/03 13:20:22 by jwilliam         ###   ########.fr       */
+/*   Created: 2023/02/03 13:00:25 by jwilliam          #+#    #+#             */
+/*   Updated: 2023/02/03 13:01:27 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	set_mlx_hooks(t_game *game)
+int	main_loop(t_game *game)
 {
-	mlx_hook(game->mlx_window, 2, 0, key_input, game);
-	mlx_hook(game->mlx_window, 3, 0, key_release, game);
-	mlx_hook(game->mlx_window, 17, 0, close_win, game);
-	return ;
+	move_loop(game);
+	draw_bg(game);
+	raycast(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_window,
+		game->img->pointer, 0, 0);
+	return (0);
 }

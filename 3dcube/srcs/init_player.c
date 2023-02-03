@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/02 11:50:01 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:04:39 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	init_other(t_game *game)
 {
 	game->doom_guy.height = 32;
 	game->doom_guy.speed = 0.1;
+	game->doom_guy.ismovef = 0;
+	game->doom_guy.ismoveb = 0;
+	game->doom_guy.isstrl = 0;
+	game->doom_guy.isstrr = 0;
+	game->doom_guy.isrotl = 0;
+	game->doom_guy.isrotr = 0;
 }
 
 void	init_dir(t_game *game, int y, int x)
