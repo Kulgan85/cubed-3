@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/03 13:04:39 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:34:08 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_camera_plane(t_game *game, t_ray rayban)
 void	init_other(t_game *game)
 {
 	game->doom_guy.height = 32;
-	game->doom_guy.speed = 0.1;
+	game->doom_guy.speed = 0.05;
 	game->doom_guy.ismovef = 0;
 	game->doom_guy.ismoveb = 0;
 	game->doom_guy.isstrl = 0;

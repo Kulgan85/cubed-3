@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:41:42 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/03 13:23:40 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/03 13:33:45 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ void	rotate_right(t_game *game)
 {
 	printf("doing rotate!\n");
 	game->doom_guy.direction = do_rotate(game->doom_guy.direction,
-			((PI / 24) * -1));
+			((PI / 72) * -1));
 	printf("Doom_Guy was rotated!\n");
 	game->doom_guy.strafe = do_rotate(game->doom_guy.strafe,
-			((PI / 24) * -1));
+			((PI / 72) * -1));
 	printf("Strafe direction was rotated!\n");
 	printf("Doomguy angle: %f, %f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
@@ -112,9 +112,9 @@ void	rotate_right(t_game *game)
 void	rotate_left(t_game *game)
 {
 	printf("doing rotate!\n");
-	game->doom_guy.direction = do_rotate(game->doom_guy.direction, PI / 24);
+	game->doom_guy.direction = do_rotate(game->doom_guy.direction, PI / 72);
 	printf("Doom_Guy was rotated!\n");
-	game->doom_guy.strafe = do_rotate(game->doom_guy.strafe, PI / 24);
+	game->doom_guy.strafe = do_rotate(game->doom_guy.strafe, PI / 72);
 	printf("Strafe direction was rotated!\n");
 	printf("Doomguy angle: %f, %f\n", game->doom_guy.direction.x,
 		game->doom_guy.direction.y);
