@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 15:54:24 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:45:31 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,22 +152,10 @@ void	texture_wall(t_game *game, void *texture, int draw_S, int draw_E, t_rayhit 
 		put_pixel(game->img, x, y, colour);
 		y++;
 	}
-
-
-	// {
-	// 	textureX = (int)(hit->wall_distance * TEX_WIDTH) % TEX_WIDTH;
-	// 	textureY = (y - draw_S) * TEX_HEIGHT / WALL_HEIGHT;
-	// 	colour = mlx_get_color_value(game->mlx, texture[textureY * TEX_WIDTH
-	// 			+ textureX]);
-	// 	printf("colour: %i\n", colour);
-	// 	mlx_pixel_put(game->mlx, game->mlx_window, x, y, colour);
-	// 	y++;
-	// }
 }
 
 void	draw_wall(t_game *game, t_rayhit *hit, int x, t_ray *aray)
 {
-	// int			i;
 	int			wallheight;
 	int			draw_start;
 	int			draw_end;
@@ -185,25 +173,8 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x, t_ray *aray)
 	printf("texture success\n");
 	texture_wall(game, texture, draw_start, draw_end, hit, x, aray);
 	printf("Post texture wall\n");
-	// i = draw_start;
-	// if (hit->side == 0)
-	// 	colour = create_rgb(255, 0, 0);
-	// else
-	// 	colour = create_rgb(128, 0, 0);
-	// while (i < draw_end)
-	// {
-	// 	put_pixel(game->img, x, i, colour);
-	// 	i++;
-	// }
 	mlx_put_image_to_window(game->mlx, game->mlx_window, game->img, 0, 0);
 }
-
-// - y = south wall
-// + y = north wall
-// - x = west wall
-// + x = east wall
-// hit->side == 0: hit a North or South wall
-// hit->side == 1: hit a East or West wall
 
 void	raycast(t_game *game)
 {
