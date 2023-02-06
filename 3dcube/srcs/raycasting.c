@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/03 16:36:28 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:57:19 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,28 @@ char	*texture_picker(t_game *game, t_rayhit *hit)
 	char	*texture;
 
 	texture = NULL;
+	printf("Hit side: %i\n", hit->side);
+	printf("Wall Normal: %f\n", hit->wall_normal);
 	if (hit->side == 0 && game->doom_guy.direction.y < 0)
+	{
 		texture = game->mapdata.so;
-	else if (hit->side == 0 && game->doom_guy.direction.y > 0)
+		printf("South\n");
+	}
+	else if (hit->side == 0 && hit->wall_normal > 0)
+	{
 		texture = game->mapdata.no;
-	if (hit->side == 1 && game->doom_guy.direction.x < 0)
+		printf("North\n");
+	}
+	if (hit->side == 1 && hit->wall_normal < 0)
+	{
 		texture = game->mapdata.we;
+		printf("West\n");
+	}
 	else if (hit->side == 1 && game->doom_guy.direction.x > 0)
+	{
 		texture = game->mapdata.ea;
+		printf("Easy\n");
+	}
 	return (texture);
 }
 
@@ -106,21 +120,29 @@ void	texture_wall(t_game *game, char *tex_name, int draw_S, int draw_E, t_rayhit
 	int	*image;
 	int	*texture;
 	int	y;
+	int num1;
+	int num2;
 	int	textureX;
 	int	textureY;
 	int	colour;
 	int *PTR_TEX_HEIGHT;
 	int	*PTR_TEX_WIDTH;
 
+	num1 = TEX_HEIGHT;
+	num2 = TEX_WIDTH;
 	printf("in tex_wall\n");
 	PTR_TEX_HEIGHT = NULL;
 	PTR_TEX_WIDTH = NULL;
 	printf("fine\n");
-	PTR_TEX_HEIGHT[0] = 128;//TEX_HEIGHT;
-	PTR_TEX_WIDTH[0] = 128;//TEX_WIDTH;
-	printf("test\n");
+	PTR_TEX_HEIGHT = &num1;
+	printf("Height good\n");
+	PTR_TEX_WIDTH = &num2;
+	printf("Height is: %i\n", *PTR_TEX_HEIGHT);
+	printf("Width is: %i\n", *PTR_TEX_WIDTH);
+	printf("Tex_name: %s\n", tex_name);
 	image = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	texture = mlx_xpm_file_to_image(game->mlx, tex_name, PTR_TEX_WIDTH, PTR_TEX_HEIGHT);
+	texture = mlx_xpm_file_to_image(game->mlx, tex_name,
+			PTR_TEX_WIDTH, PTR_TEX_HEIGHT);
 	if (!texture)
 		print_error(8, "Bad Texture PTR\n");
 	y = draw_S;
@@ -143,6 +165,7 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 	int			wallheight;
 	int			draw_start;
 	int			draw_end;
+	char		*texture;
 
 	wallheight = (int)(WIN_HEIGHT / hit->wall_distance);
 	draw_start = -wallheight / 2 + WIN_HEIGHT / 2;
@@ -152,7 +175,9 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
 	printf("Pre texture wall\n");
-	texture_wall(game, texture_picker(game, hit), draw_start, draw_end, hit, x);
+	texture = texture_picker(game, hit);
+	printf("Texture: %s\n", texture);
+	texture_wall(game, texture, draw_start, draw_end, hit, x);
 	printf("Post texture wall\n");
 	i = draw_start;
 	if (hit->side == 0)
