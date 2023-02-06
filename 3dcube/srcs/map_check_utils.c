@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 19:38:25 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/01/20 11:31:32 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:33:05 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ int	skip_lines(t_game *game)
 	int			i;
 
 	i = 0;
+	printf("WORK\n");
 	while (ft_strtrim(game->file[i], " ")[0] != '1' &&
 			ft_strtrim(game->file[i], " ")[0] != '0')
 		i++;
+	printf("please....\n");
 	return (i);
 }
 

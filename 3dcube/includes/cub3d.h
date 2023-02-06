@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/03 16:29:33 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:53:58 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,13 @@ typedef struct s_images
 typedef struct s_mapdata
 {
 	char	*no;
+	void	*northimg;
 	char	*so;
+	void	*southimg;
 	char	*ea;
+	void	*eastimg;
 	char	*we;
+	void	*westimg;
 	int		c[3];
 	int		f[3];
 	int		max_width;
@@ -196,6 +200,7 @@ typedef struct s_rayhit
 	double	wall_normal;
 	char	*wall_texture;
 	int		wall_colour;
+	double	wall_x;
 }	t_rayhit;
 
 /* Main Struct */
@@ -221,6 +226,9 @@ int			create_rgb(int r, int g, int b);
 
 /* error.c */
 void		print_error(int code, char *str);
+
+/* imageload.c */
+void		imageload(t_game *game);
 
 /* init_img.c */
 int			init_image(t_game *game);

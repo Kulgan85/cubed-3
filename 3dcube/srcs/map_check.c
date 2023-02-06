@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/23 13:06:34 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:32:31 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,13 +142,17 @@ t_tile	**generate_tilemap(t_game *game)
 	int			y;
 	int			skip;
 
+	printf("HOEOEIFNOSENF\n");
 	skip = skip_lines(game);
+	printf("SKIPPING FUCKES\n");
 	game->mapdata.max_height = (count_height(game, skip));
 	game->mapdata.max_width = (count_width(game, skip) - 1);
+	printf("MAPD OIRGNOIRNEF\n");
 	tilemap = alloc_tilemap(skip, game);
 	if (!tilemap)
-		printf("malloc error on alloc_tilemap()");
+		printf("malloc error on alloc_tilemap()\n");
 	y = 0;
+	printf("FUCK\n");
 	while (game->file[skip + y] && y < game->mapdata.max_height)
 	{
 		x = 0;

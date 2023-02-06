@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/02/03 13:21:43 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/02/06 15:54:44 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ FILES = main.c \
 		close_game.c \
 		draw_beegee.c \
 		error.c \
+		imageload.c \
 		init_img.c \
 		init_mlx.c \
 		init_player.c \

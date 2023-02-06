@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 10:57:19 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:54:24 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,93 +79,99 @@ t_rayhit	shoot_ray(t_game *game, t_ray *ray_stuff)
 			hit = 1;
 	}
 	if (beam.side == 0)
+	{
 		beam.wall_distance = (ray_stuff->side_dist_x - ray_stuff->delta_dist_x);
+		beam.wall_x = beam_pos_y + beam.wall_distance * ray_stuff->ray_dir_y;
+	}
 	else
+	{
 		beam.wall_distance = (ray_stuff->side_dist_y - ray_stuff->delta_dist_y);
+		beam.wall_x = beam_pos_x + beam.wall_distance * ray_stuff->ray_dir_x;
+	}
+	beam.wall_x -= floor(beam.wall_x);
 	return (beam);
 }
 
-char	*texture_picker(t_game *game, t_rayhit *hit)
+void	*texture_picker(t_game *game, t_rayhit *hit, t_ray *ray_stuff)
 {
-	char	*texture;
+	void	*texture;
 
-	texture = NULL;
+	texture = game->mapdata.southimg;
 	printf("Hit side: %i\n", hit->side);
 	printf("Wall Normal: %f\n", hit->wall_normal);
-	if (hit->side == 0 && game->doom_guy.direction.y < 0)
+	if (hit->side == 0 && ray_stuff->ray_dir_y < 0)
 	{
-		texture = game->mapdata.so;
+		texture = game->mapdata.southimg;
 		printf("South\n");
 	}
-	else if (hit->side == 0 && hit->wall_normal > 0)
+	else if (hit->side == 0 && ray_stuff->ray_dir_y > 0)
 	{
-		texture = game->mapdata.no;
+		texture = game->mapdata.northimg;
 		printf("North\n");
 	}
-	if (hit->side == 1 && hit->wall_normal < 0)
+	if (hit->side == 1 && ray_stuff->ray_dir_x < 0)
 	{
-		texture = game->mapdata.we;
+		texture = game->mapdata.westimg;
 		printf("West\n");
 	}
-	else if (hit->side == 1 && game->doom_guy.direction.x > 0)
+	else if (hit->side == 1 && ray_stuff->ray_dir_x > 0)
 	{
-		texture = game->mapdata.ea;
+		texture = game->mapdata.eastimg;
 		printf("Easy\n");
 	}
 	return (texture);
 }
 
-void	texture_wall(t_game *game, char *tex_name, int draw_S, int draw_E, t_rayhit *hit, int x)
+void	texture_wall(t_game *game, void *texture, int draw_S, int draw_E, t_rayhit *hit, int x, t_ray *ray)
 {
-	int	*image;
-	int	*texture;
-	int	y;
-	int num1;
-	int num2;
-	int	textureX;
-	int	textureY;
-	int	colour;
-	int *PTR_TEX_HEIGHT;
-	int	*PTR_TEX_WIDTH;
+	int		*data;
+	int		y;
+	int		tex_x;
+	int		tex_y;
+	double	step;
+	int		wallheight;
+	double	tex_pos;
+	t_images	newimg;
+	int		colour;
 
-	num1 = TEX_HEIGHT;
-	num2 = TEX_WIDTH;
-	printf("in tex_wall\n");
-	PTR_TEX_HEIGHT = NULL;
-	PTR_TEX_WIDTH = NULL;
-	printf("fine\n");
-	PTR_TEX_HEIGHT = &num1;
-	printf("Height good\n");
-	PTR_TEX_WIDTH = &num2;
-	printf("Height is: %i\n", *PTR_TEX_HEIGHT);
-	printf("Width is: %i\n", *PTR_TEX_WIDTH);
-	printf("Tex_name: %s\n", tex_name);
-	image = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	texture = mlx_xpm_file_to_image(game->mlx, tex_name,
-			PTR_TEX_WIDTH, PTR_TEX_HEIGHT);
-	if (!texture)
-		print_error(8, "Bad Texture PTR\n");
 	y = draw_S;
+	tex_x = (int)(hit->wall_x * (double)(TEX_WIDTH));
+	if (hit->side == 0 && ray->ray_dir_x > 0)
+		tex_x = TEX_WIDTH - tex_x - 1;
+	if (hit->side == 1 && ray->ray_dir_y < 0)
+		tex_x = TEX_WIDTH - tex_x - 1;
+	wallheight = (int)(WIN_HEIGHT / hit->wall_distance);
+	step = 1.0 * TEX_HEIGHT / wallheight;
+	tex_pos = (draw_S - WIN_HEIGHT / 2 + wallheight / 2) * step;
+	data = (int *)mlx_get_data_addr(texture, &newimg.bpp, &newimg.l_size, &newimg.endian);
 	while (y < draw_E)
 	{
-		textureX = (int)(hit->wall_distance * TEX_WIDTH) % TEX_WIDTH;
-		textureY = (y - draw_S) * TEX_HEIGHT / WALL_HEIGHT;
-		colour = mlx_get_color_value(game->mlx, texture[textureY * TEX_WIDTH
-				+ textureX]);
-		mlx_pixel_put(game->mlx, game->mlx_window, x, y, colour);
+		tex_y = (int)tex_pos;
+		tex_pos += step;
+		colour = data[TEX_HEIGHT * tex_y + tex_x];
+		put_pixel(game->img, x, y, colour);
 		y++;
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_window, image, 0, 0);
+
+
+	// {
+	// 	textureX = (int)(hit->wall_distance * TEX_WIDTH) % TEX_WIDTH;
+	// 	textureY = (y - draw_S) * TEX_HEIGHT / WALL_HEIGHT;
+	// 	colour = mlx_get_color_value(game->mlx, texture[textureY * TEX_WIDTH
+	// 			+ textureX]);
+	// 	printf("colour: %i\n", colour);
+	// 	mlx_pixel_put(game->mlx, game->mlx_window, x, y, colour);
+	// 	y++;
+	// }
 }
 
-void	draw_wall(t_game *game, t_rayhit *hit, int x)
+void	draw_wall(t_game *game, t_rayhit *hit, int x, t_ray *aray)
 {
-	int			i;
-	int			colour;
+	// int			i;
 	int			wallheight;
 	int			draw_start;
 	int			draw_end;
-	char		*texture;
+	void		*texture;
 
 	wallheight = (int)(WIN_HEIGHT / hit->wall_distance);
 	draw_start = -wallheight / 2 + WIN_HEIGHT / 2;
@@ -174,21 +180,22 @@ void	draw_wall(t_game *game, t_rayhit *hit, int x)
 	draw_end = wallheight / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	printf("Pre texture wall\n");
-	texture = texture_picker(game, hit);
-	printf("Texture: %s\n", texture);
-	texture_wall(game, texture, draw_start, draw_end, hit, x);
+	printf("Pre texture pick\n");
+	texture = texture_picker(game, hit, aray);
+	printf("texture success\n");
+	texture_wall(game, texture, draw_start, draw_end, hit, x, aray);
 	printf("Post texture wall\n");
-	i = draw_start;
-	if (hit->side == 0)
-		colour = create_rgb(255, 0, 0);
-	else
-		colour = create_rgb(128, 0, 0);
-	while (i < draw_end)
-	{
-		put_pixel(game->img, x, i, colour);
-		i++;
-	}
+	// i = draw_start;
+	// if (hit->side == 0)
+	// 	colour = create_rgb(255, 0, 0);
+	// else
+	// 	colour = create_rgb(128, 0, 0);
+	// while (i < draw_end)
+	// {
+	// 	put_pixel(game->img, x, i, colour);
+	// 	i++;
+	// }
+	mlx_put_image_to_window(game->mlx, game->mlx_window, game->img, 0, 0);
 }
 
 // - y = south wall
@@ -224,7 +231,7 @@ void	raycast(t_game *game)
 		else
 			ray_stuff.delta_dist_y = fabs(1 / ray_stuff.ray_dir_y);
 		shotray = shoot_ray(game, &ray_stuff);
-		draw_wall(game, &shotray, ray);
+		draw_wall(game, &shotray, ray, &ray_stuff);
 		ray++;
 	}
 	return ;

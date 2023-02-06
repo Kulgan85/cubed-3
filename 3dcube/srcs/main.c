@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/03 13:18:08 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:31:07 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,14 @@ int	main(int argc, char **argv)
 	printf("map read\n");
 	if (init_check(&game) != 0)
 		print_error(1, "Invalid map file");
+	imageload(&game);
+	printf("generating tilemap\n");
 	game.tilemap = generate_tilemap(&game);
+	printf("generating tilemap done\n");
 	init_player(&game);
+	printf("init player done\n");
 	init_image(&game);
+	printf("init player done\n");
 	draw_bg(&game);
 	printf("pre raycast\n");
 	raycast(&game);

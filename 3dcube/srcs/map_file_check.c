@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/01/20 12:50:01 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:22:06 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,27 @@ int	check_map_settings(t_game *game)
 	int		i;
 
 	i = 0;
+	printf("checking the map settings lmao\n");
 	if (game->mapdata.no == NULL)
 		return (-1);
+	printf("n was good\n");
 	if (game->mapdata.so == NULL)
 		return (-1);
+	printf("s was good\n");
 	if (game->mapdata.ea == NULL)
 		return (-1);
+	printf("e was good\n");
 	if (game->mapdata.we == NULL)
 		return (-1);
+	printf("w was good\n");
 	while (i < 3)
 	{
 		if (game->mapdata.c[i] < 0 || game->mapdata.c[i] > 255)
 			return (-1);
+		printf("c was good\n");
 		if (game->mapdata.f[i] < 0 || game->mapdata.f[i] > 255)
 			return (-1);
+		printf("f was good\n");
 		i++;
 	}
 	return (0);
@@ -92,10 +99,13 @@ int	init_check(t_game *game)
 	i = 0;
 	j = 0;
 	initialise_struct(&game->mapdata);
+	printf("before char check\n");
 	while (game->file[j] != NULL)
 	{
+		printf("in charcheck\n");
 		charcheck(i, game, game->file[j]);
 		j++;
 	}
+	printf("post charcheck\n");
 	return (check_map_settings(game));
 }
