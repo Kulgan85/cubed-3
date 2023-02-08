@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 15:53:58 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/08 15:47:25 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,9 +163,8 @@ typedef struct s_player
 	double		speed;
 	double		x;
 	double		y;
-	// double		rad;
-	// double		rangle;
-	//double		player_angle;
+	double		plane_x;
+	double		plane_y;
 	int			ismovef;
 	int			ismoveb;
 	int			isstrl;
@@ -182,26 +181,42 @@ typedef struct s_ray
 	// double	camera_plane_x_pos;
 	// double	camera_plane_y_pos;
 	//double	camera_distance;
+	double		camera_x;
 	double		ray_dir_x;
 	double		ray_dir_y;
-	double		ray_x;
-	double		ray_y;
+	// double		ray_x;
+	// double		ray_y;
 	double		side_dist_x;
 	double		side_dist_y;
 	double		delta_dist_x;
 	double		delta_dist_y;
+	int			side;
+	double		wall_distance;
+	double		wall_normal;
+	char		*wall_texture;
+	int			wall_colour;
+	double		wall_x;
+	int			wallheight;
+	int			draw_start;
+	int			draw_end;
+	void		*texture;
+	int			hit;
+	int			beam_pos_x;
+	int			beam_pos_y;
+	int			step_x;
+	int			step_y;
 }	t_ray;
 
 /* hitray Struct */
-typedef struct s_rayhit
-{
-	int		side;
-	double	wall_distance;
-	double	wall_normal;
-	char	*wall_texture;
-	int		wall_colour;
-	double	wall_x;
-}	t_rayhit;
+// typedef struct s_rayhit
+// {
+// 	int		side;
+// 	double	wall_distance;
+// 	double	wall_normal;
+// 	char	*wall_texture;
+// 	int		wall_colour;
+// 	double	wall_x;
+// }	t_rayhit;
 
 /* Main Struct */
 typedef struct s_game

@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/03 13:34:08 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:27:21 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_dir(t_game *game, int y, int x)
 		game->doom_guy.direction.x = 1;
 		game->doom_guy.direction.y = 0;
 		game->doom_guy.strafe.x = 0;
-		game->doom_guy.strafe.y = 1;
+		game->doom_guy.strafe.y = -1;
 	}
 	if (game->tilemap[y][x].type == SOUTH)
 	{

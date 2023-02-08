@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 16:45:31 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/08 16:30:48 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,126 +25,109 @@ static void	put_pixel(t_images *image, int x, int y, int colour)
 	}
 }
 
-t_rayhit	shoot_ray(t_game *game, t_ray *ray_stuff)
+void	shoot_ray(t_game *game, t_ray *ray_stuff)
 {
-	t_rayhit	beam;
-	int			hit;
-	int			beam_pos_x;
-	int			beam_pos_y;
-	int			step_x;
-	int			step_y;
-
-	hit = 0;
-	beam_pos_x = (int)game->doom_guy.x;
-	beam_pos_y = (int)game->doom_guy.y;
+	ray_stuff->hit = 0;
+	ray_stuff->beam_pos_x = (int)game->doom_guy.x;
+	ray_stuff->beam_pos_y = (int)game->doom_guy.y;
 	if (ray_stuff->ray_dir_x < 0)
 	{
-		step_x = -1;
-		ray_stuff->side_dist_x = (game->doom_guy.x - beam_pos_x)
+		ray_stuff->step_x = -1;
+		ray_stuff->side_dist_x = (game->doom_guy.x - ray_stuff->beam_pos_x)
 			* ray_stuff->delta_dist_x;
 	}
 	else
 	{
-		step_x = 1;
-		ray_stuff->side_dist_x = (beam_pos_x + 1.0 - game->doom_guy.x)
+		ray_stuff->step_x = 1;
+		ray_stuff->side_dist_x = (ray_stuff->beam_pos_x + 1.0 - game->doom_guy.x)
 			* ray_stuff->delta_dist_x;
 	}
 	if (ray_stuff->ray_dir_y < 0)
 	{
-		step_y = -1;
-		ray_stuff->side_dist_y = (game->doom_guy.y - beam_pos_y)
+		ray_stuff->step_y = -1;
+		ray_stuff->side_dist_y = (game->doom_guy.y - ray_stuff->beam_pos_y)
 			* ray_stuff->delta_dist_y;
 	}
 	else
 	{
-		step_y = 1;
-		ray_stuff->side_dist_y = (beam_pos_y + 1 - game->doom_guy.y)
+		ray_stuff->step_y = 1;
+		ray_stuff->side_dist_y = (ray_stuff->beam_pos_y + 1 - game->doom_guy.y)
 			* ray_stuff->delta_dist_y;
 	}
-	while (!hit)
+	while (!ray_stuff->hit)
 	{
 		if (ray_stuff->side_dist_x < ray_stuff->side_dist_y)
 		{
 			ray_stuff->side_dist_x += ray_stuff->delta_dist_x;
-			beam_pos_x += step_x;
-			beam.side = 0;
+			ray_stuff->beam_pos_x += ray_stuff->step_x;
+			ray_stuff->side = 0;
 		}
 		else
 		{
 			ray_stuff->side_dist_y += ray_stuff->delta_dist_y;
-			beam_pos_y += step_y;
-			beam.side = 1;
+			ray_stuff->beam_pos_y += ray_stuff->step_y;
+			ray_stuff->side = 1;
 		}
-		if (game->tilemap[beam_pos_y][beam_pos_x].type == WALL)
-			hit = 1;
+		if (game->tilemap[ray_stuff->beam_pos_y][ray_stuff->beam_pos_x].type == WALL)
+			ray_stuff->hit = 1;
 	}
-	if (beam.side == 0)
+	if (ray_stuff->side == 0)
 	{
-		beam.wall_distance = (ray_stuff->side_dist_x - ray_stuff->delta_dist_x);
-		beam.wall_x = beam_pos_y + beam.wall_distance * ray_stuff->ray_dir_y;
+		ray_stuff->wall_distance = (ray_stuff->side_dist_x - ray_stuff->delta_dist_x);
+		ray_stuff->wall_x = game->doom_guy.y + ray_stuff->wall_distance * ray_stuff->ray_dir_y;
 	}
 	else
 	{
-		beam.wall_distance = (ray_stuff->side_dist_y - ray_stuff->delta_dist_y);
-		beam.wall_x = beam_pos_x + beam.wall_distance * ray_stuff->ray_dir_x;
+		ray_stuff->wall_distance = (ray_stuff->side_dist_y - ray_stuff->delta_dist_y);
+		ray_stuff->wall_x = game->doom_guy.x + ray_stuff->wall_distance * ray_stuff->ray_dir_x;
 	}
-	beam.wall_x -= floor(beam.wall_x);
-	return (beam);
+	ray_stuff->wall_x -= floor(ray_stuff->wall_x);
+	return ;
 }
 
-void	*texture_picker(t_game *game, t_rayhit *hit, t_ray *ray_stuff)
+void	*texture_picker(t_game *game, t_ray *ray_stuff)
 {
 	void	*texture;
 
-	texture = game->mapdata.southimg;
-	printf("Hit side: %i\n", hit->side);
-	printf("Wall Normal: %f\n", hit->wall_normal);
-	if (hit->side == 0 && ray_stuff->ray_dir_y < 0)
+	texture = NULL;
+	if (ray_stuff->side == 0)
 	{
-		texture = game->mapdata.southimg;
-		printf("South\n");
+		if (ray_stuff->ray_dir_x < 0)
+			texture = game->mapdata.eastimg;
+		else
+			texture = game->mapdata.westimg;
 	}
-	else if (hit->side == 0 && ray_stuff->ray_dir_y > 0)
+	else if (ray_stuff->side == 1)
 	{
-		texture = game->mapdata.northimg;
-		printf("North\n");
-	}
-	if (hit->side == 1 && ray_stuff->ray_dir_x < 0)
-	{
-		texture = game->mapdata.westimg;
-		printf("West\n");
-	}
-	else if (hit->side == 1 && ray_stuff->ray_dir_x > 0)
-	{
-		texture = game->mapdata.eastimg;
-		printf("Easy\n");
+		if (ray_stuff->ray_dir_y < 0)
+			texture = game->mapdata.northimg;
+		else
+			texture = game->mapdata.southimg;
 	}
 	return (texture);
 }
 
-void	texture_wall(t_game *game, void *texture, int draw_S, int draw_E, t_rayhit *hit, int x, t_ray *ray)
+void	texture_wall(t_game *game, int x, t_ray *ray)
 {
 	int		*data;
 	int		y;
 	int		tex_x;
 	int		tex_y;
 	double	step;
-	int		wallheight;
 	double	tex_pos;
 	t_images	newimg;
 	int		colour;
 
-	y = draw_S;
-	tex_x = (int)(hit->wall_x * (double)(TEX_WIDTH));
-	if (hit->side == 0 && ray->ray_dir_x > 0)
+	y = ray->draw_start;
+	tex_x = (int)(ray->wall_x * (double)(TEX_WIDTH));
+	if (ray->side == 0 && ray->ray_dir_x > 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
-	if (hit->side == 1 && ray->ray_dir_y < 0)
+	if (ray->side == 1 && ray->ray_dir_y < 0)
 		tex_x = TEX_WIDTH - tex_x - 1;
-	wallheight = (int)(WIN_HEIGHT / hit->wall_distance);
-	step = 1.0 * TEX_HEIGHT / wallheight;
-	tex_pos = (draw_S - WIN_HEIGHT / 2 + wallheight / 2) * step;
-	data = (int *)mlx_get_data_addr(texture, &newimg.bpp, &newimg.l_size, &newimg.endian);
-	while (y < draw_E)
+	step = 1.0 * TEX_HEIGHT / ray->wallheight;
+	tex_pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->wallheight / 2) * step;
+	data = (int *)mlx_get_data_addr(ray->texture, &newimg.bpp, &newimg.l_size, &newimg.endian);
+	while (y < ray->draw_end)
 	{
 		tex_y = (int)tex_pos;
 		tex_pos += step;
@@ -154,45 +137,38 @@ void	texture_wall(t_game *game, void *texture, int draw_S, int draw_E, t_rayhit 
 	}
 }
 
-void	draw_wall(t_game *game, t_rayhit *hit, int x, t_ray *aray)
+void	draw_wall(t_game *game, int x, t_ray *aray)
 {
-	int			wallheight;
-	int			draw_start;
-	int			draw_end;
-	void		*texture;
-
-	wallheight = (int)(WIN_HEIGHT / hit->wall_distance);
-	draw_start = -wallheight / 2 + WIN_HEIGHT / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = wallheight / 2 + WIN_HEIGHT / 2;
-	if (draw_end >= WIN_HEIGHT)
-		draw_end = WIN_HEIGHT - 1;
-	printf("Pre texture pick\n");
-	texture = texture_picker(game, hit, aray);
-	printf("texture success\n");
-	texture_wall(game, texture, draw_start, draw_end, hit, x, aray);
-	printf("Post texture wall\n");
+	aray->wallheight = (int)(WIN_HEIGHT / aray->wall_distance);
+	aray->draw_start = -aray->wallheight / 2 + WIN_HEIGHT / 2;
+	if (aray->draw_start < 0)
+		aray->draw_start = 0;
+	aray->draw_end = aray->wallheight / 2 + WIN_HEIGHT / 2;
+	if (aray->draw_end >= WIN_HEIGHT)
+		aray->draw_end = WIN_HEIGHT - 1;
+	aray->texture = texture_picker(game, aray);
+	texture_wall(game, x, aray);
 	mlx_put_image_to_window(game->mlx, game->mlx_window, game->img, 0, 0);
 }
 
 void	raycast(t_game *game)
 {
 	int			ray;
-	double		camera_x;
 	t_ray		ray_stuff;
-	t_rayhit	shotray;
+//	t_rayhit	shotray;
 
 	ray = 0;
 	while (ray < WIN_WIDTH)
 	{
-		camera_x = 2 * ray / (double)WIN_WIDTH - 1;
+		ray_stuff.camera_x = 2 * ray / (double)WIN_WIDTH - 1;
+		// ray_stuff.ray_dir_x = game->doom_guy.direction.x + (game->doom_guy.plane_x * ray_stuff.camera_x);
+		// ray_stuff.ray_dir_y = game->doom_guy.direction.y + (game->doom_guy.plane_y * ray_stuff.camera_x);
 		ray_stuff.ray_dir_x = game->doom_guy.direction.x
-			+ game->doom_guy.direction.y * (camera_x / 2);
+			- game->doom_guy.direction.y * (ray_stuff.camera_x / 2);
 		ray_stuff.ray_dir_y = game->doom_guy.direction.y
-			- game->doom_guy.direction.x * (camera_x / 2);
-		ray_stuff.ray_x = game->doom_guy.direction.x + ray_stuff.ray_dir_x;
-		ray_stuff.ray_y = game->doom_guy.direction.y + ray_stuff.ray_dir_y;
+			+ game->doom_guy.direction.x * (ray_stuff.camera_x / 2);
+	//	ray_stuff.ray_x = game->doom_guy.direction.x + ray_stuff.ray_dir_x;
+	//	ray_stuff.ray_y = game->doom_guy.direction.y + ray_stuff.ray_dir_y;
 		if (ray_stuff.ray_dir_x == 0)
 			ray_stuff.delta_dist_x = 1e30;
 		else
@@ -201,8 +177,8 @@ void	raycast(t_game *game)
 			ray_stuff.delta_dist_y = 1e30;
 		else
 			ray_stuff.delta_dist_y = fabs(1 / ray_stuff.ray_dir_y);
-		shotray = shoot_ray(game, &ray_stuff);
-		draw_wall(game, &shotray, ray, &ray_stuff);
+		shoot_ray(game, &ray_stuff);
+		draw_wall(game, ray, &ray_stuff);
 		ray++;
 	}
 	return ;
