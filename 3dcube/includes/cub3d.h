@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/02/09 14:39:34 by tbertozz         ###   ########.fr       */
+=======
+/*   Updated: 2023/02/09 14:56:54 by jwilliam         ###   ########.fr       */
+>>>>>>> 45d907f28ad2d2bc1bd61e59be94fd31ce2d2f1f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,7 +230,7 @@ void		print_error(int code, char *str);
 
 /* free.c */
 void		free_2d_array(char **array);
-void		free_tilemap(t_tile **tile);
+void		free_tilemap(t_game *game);
 
 /* imageload.c */
 void		imageload(t_game *game);

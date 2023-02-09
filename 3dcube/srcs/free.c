@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:17:41 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 13:19:15 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:06:26 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ void	free_2d_array(char **array)
 	free(array);
 }
 
-void	free_tilemap(t_tile **tile)
+void	free_tilemap(t_game *game)
 {
 	int		i;
 
 	i = 0;
-	while (tile[i])
-		free(tile[i++]);
-	free(tile);
+	while (i < game->mapdata.max_height)
+	{
+		free(game->tilemap[i]);
+		i++;
+	}
+	free(game->tilemap);
+	game->tilemap = NULL;
 }
