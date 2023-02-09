@@ -249,9 +249,7 @@ void		init_other(t_game *game);
 int			key_input(int key, void *param);
 int			key_release(int key, void *param);
 void		move_guy(int key, t_game *game);
-t_pvector	do_rotate(t_pvector vector, double rotate);
-void		rotate_right(t_game *game);
-void		rotate_left(t_game *game);
+
 
 /* loops.c */
 int			main_loop(t_game *game);
@@ -297,6 +295,11 @@ void		strafe_right(t_game *game);
 
 /* raycast.c */
 void		raycast(t_game *game);
+
+/* rotation.c */
+t_pvector	do_rotate(t_pvector vector, double rotate);
+void		rotate_right(t_game *game);
+void		rotate_left(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);
