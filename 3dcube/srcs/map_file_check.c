@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 16:22:06 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:18:26 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ int	check_map_settings(t_game *game)
 	while (i < 3)
 	{
 		if (game->mapdata.c[i] < 0 || game->mapdata.c[i] > 255)
+		{
+			printf("C[%i] was bad. It was %i\n", i, game->mapdata.c[i]);
 			return (-1);
+		}
 		printf("c was good\n");
 		if (game->mapdata.f[i] < 0 || game->mapdata.f[i] > 255)
 			return (-1);
