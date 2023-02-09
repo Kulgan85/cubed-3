@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:52:54 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 12:55:41 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:23:24 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ int	check_tile_floor(t_tiletype tile)
 void	check_tile_player(t_game *game, t_tiletype tile)
 {
 	if (tile == NORTH || tile == SOUTH || tile == WEST || tile == EAST)
+	{
+		if (game->mapdata.player_exists == 1)
+			print_error(2, "Bad Map: multiple players");
 		game->mapdata.player_exists = 1;
+		printf("Player now exists");
+	}
+	return ;
 }
 
 int	check_adjacent_tile(t_tile **tilemap, int y, int x)

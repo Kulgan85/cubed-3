@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 12:18:26 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:33:04 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	initialise_struct(t_mapdata *mapdata)
 	}
 	mapdata->max_height = 0;
 	mapdata->max_width = 0;
+	mapdata->player_exists = 0;
 }
 
 int	charcheck(int i, t_game *game, char *file)
@@ -50,9 +51,9 @@ int	charcheck(int i, t_game *game, char *file)
 		i = add_texture(i + 3, temp[1], game, 2);
 	else if (ft_strncmp("WE", temp[0], 2) == 0)
 		i = add_texture(i + 3, temp[1], game, 3);
-	else if (ft_strncmp("C", temp[0], 1) == 0)
+	else if (ft_strncmp("C", temp[0], 2) == 0)
 		i = set_colors(i, temp[1], game, 0);
-	else if (ft_strncmp("F", temp[0], 1) == 0)
+	else if (ft_strncmp("F", temp[0], 2) == 0)
 		i = set_colors(i, temp[1], game, 1);
 	else
 		i = -1;

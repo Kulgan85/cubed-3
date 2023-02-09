@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 12:58:45 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:29:26 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap)
 			return (0);
 		}
 	}
+	check_tile_player(game, tilemap[y][x].type);
 	if (check_tile_skip(tilemap[y][x].type) == 0)
 		return (1);
 	if ((check_tile_floor(tilemap[y][x].type) == 0)
@@ -64,7 +65,6 @@ void	setup_tile(t_tile **tilemap, int y, int x, t_game *game)
 	tilemap[y][x].og_type = tilemap[y][x].type;
 	tilemap[y][x].position.x = x;
 	tilemap[y][x].position.y = y;
-	printf("good");
 	if (y > 0)
 		tilemap[y][x].up = &tilemap[y - 1][x];
 	else
@@ -150,7 +150,6 @@ t_tile	**generate_tilemap(t_game *game)
 				x++;
 			}
 		}
-
 		y++;
 	}
 	if (perform_floodfill(game, tilemap) != 1)
@@ -164,7 +163,6 @@ int	perform_floodfill(t_game *game, t_tile **tilemap)
 	int	x;
 
 	y = 0;
-	printf("FLOOD FILL START\n");
 	while (y < game->mapdata.max_height)
 	{
 		x = 0;
@@ -181,6 +179,7 @@ int	perform_floodfill(t_game *game, t_tile **tilemap)
 		}
 		y++;
 	}
-	printf("Flood fill complete\n\n");
+	if (game->mapdata.player_exists == 0)
+		print_error(2, "Bad map: No player");
 	return (1);
 }

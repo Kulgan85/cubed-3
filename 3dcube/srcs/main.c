@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 12:34:53 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:56:55 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 	start_mlx(&game);
 	if (argc != 2)
 		print_error(1, "Invalid arguments - ./cub3d path_to_mapfile/*.cub");
+	if (ft_strncmp(".cub", &argv[1][(int)(ft_strlen(argv[1])) - 4], 4) != 0)
+		print_error(1, "Invalid map type. Please use .cub");
 	if (read_map(argv[1], &game) != 0)
 		print_error(1, "Map cannot be read");
 	if (init_check(&game) != 0)

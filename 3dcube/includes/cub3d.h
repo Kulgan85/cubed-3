@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 12:49:06 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:06:23 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,6 +259,7 @@ int			count_width(t_game *game, int skip);
 
 /* map_check_utils2.c */
 int			check_tile_skip(t_tiletype tile);
+void		check_tile_player(t_game *game, t_tiletype tile);
 int			check_tile_floor(t_tiletype tile);
 int			check_adjacent_tile(t_tile **tilemap, int y, int x);
 

@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:37:53 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 12:40:55 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:43:01 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	move_forward(t_game *game)
 	if ((int)new_x != (int)game->doom_guy.x)
 	{
 		if (game->tilemap[(int)game->doom_guy.y][(int)new_x].type != WALL)
-		game->doom_guy.x = new_x;
+			game->doom_guy.x = new_x;
 	}
 	else
 		game->doom_guy.x = new_x;
 	if ((int)new_y != (int)game->doom_guy.y)
 	{
 		if (game->tilemap[(int)new_y][(int)game->doom_guy.x].type != WALL)
-		game->doom_guy.y = new_y;
+			game->doom_guy.y = new_y;
 	}
 	else
 		game->doom_guy.y = new_y;
