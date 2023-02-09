@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:52:54 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 13:23:24 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:15:34 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ int	check_adjacent_tile(t_tile **tilemap, int y, int x)
 	else
 	{
 		printf("fail adjacent tile floor\n");
-		printf("up: %d down: %d right: %d left: %d\n", tilemap[x][y].up->type, tilemap[x][y].down->type, tilemap[x][y].left->type, tilemap[x][y].right->type);
+		printf("up: %d down: %d right: %d left: %d\n", tilemap[x][y].up->type,
+			tilemap[x][y].down->type, tilemap[x][y].left->type,
+			tilemap[x][y].right->type);
 		return (1);
 	}
 }

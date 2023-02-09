@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 13:29:26 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:22:33 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /* Perform a lazy flood fill on the map */
 int	floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap)
 {
-	printf("max height - %i, max width - %i\n", game->mapdata.max_height, game->mapdata.max_width);
+	printf("max height - %i, max width - %i\n", game->mapdata.max_height,
+		game->mapdata.max_width);
 	printf("wall type - %d\n", tilemap[y][y].type);
 	if ((x == 0 || x == game->mapdata.max_width)
 		|| (y == 0 || y == game->mapdata.max_height))
@@ -172,7 +173,6 @@ int	perform_floodfill(t_game *game, t_tile **tilemap)
 			if (!(floodfill_tile_check(game, y, x, tilemap)))
 			{
 				printf("BAD\n");
-				//brute_force_print_map(tilemap, game);
 				return (0);
 			}
 			x++;

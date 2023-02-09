@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/02/09 14:39:34 by tbertozz         ###   ########.fr       */
-=======
-/*   Updated: 2023/02/09 14:56:54 by jwilliam         ###   ########.fr       */
->>>>>>> 45d907f28ad2d2bc1bd61e59be94fd31ce2d2f1f
+/*   Created: 2023/02/09 15:11:07 by tbertozz          #+#    #+#             */
+/*   Updated: 2023/02/09 15:20:29 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,9 +245,6 @@ void		init_other(t_game *game);
 int			key_input(int key, void *param);
 int			key_release(int key, void *param);
 void		move_guy(int key, t_game *game);
-t_pvector	do_rotate(t_pvector vector, double rotate);
-void		rotate_right(t_game *game);
-void		rotate_left(t_game *game);
 
 /* loops.c */
 int			main_loop(t_game *game);
@@ -294,6 +287,11 @@ void		move_forward(t_game *game);
 void		move_backward(t_game *game);
 void		strafe_left(t_game *game);
 void		strafe_right(t_game *game);
+
+/* movement2.c */
+t_pvector	do_rotate(t_pvector vector, double rotate);
+void		rotate_right(t_game *game);
+void		rotate_left(t_game *game);
 
 /* raycast.c */
 void		raycast(t_game *game);

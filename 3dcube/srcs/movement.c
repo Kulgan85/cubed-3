@@ -6,13 +6,13 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:37:53 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 13:43:01 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:14:44 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		move_loop(t_game *game)
+int	move_loop(t_game *game)
 {
 	if (game->doom_guy.ismovef == 1)
 		move_forward(game);
