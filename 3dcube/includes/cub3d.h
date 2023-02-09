@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 14:04:57 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:39:34 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ MLX window settings
 */
 # define WIN_WIDTH		1280
 # define WIN_HEIGHT		720
-# define WIN_TITLE		"cub3d"
+# define WIN_TITLE		"cub3D"
 # define WALL_HEIGHT	128
-# define FOV			60
 # define TEX_WIDTH		128
 # define TEX_HEIGHT		128
 

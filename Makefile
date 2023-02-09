@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/02/09 13:21:38 by jwilliam         ###   ########.fr        #
+#    Updated: 2023/02/09 14:39:40 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 
 CC = gcc -g
 

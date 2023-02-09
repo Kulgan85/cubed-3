@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 13:33:04 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:11:59 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,13 @@ int	charcheck(int i, t_game *game, char *file)
 	temp = ft_split(file, ' ');
 	if (!temp)
 		return (-1);
-	printf("In charcheck\n");
-	printf("%s\n", file);
-	if (ft_strncmp("NO", temp[0], 2) == 0)
+	if (ft_strncmp("NO", temp[0], 3) == 0)
 		i = add_texture(i + 3, temp[1], game, 0);
-	else if (ft_strncmp("SO", temp[0], 2) == 0)
+	else if (ft_strncmp("SO", temp[0], 3) == 0)
 		i = add_texture(i + 3, temp[1], game, 1);
-	else if (ft_strncmp("EA", temp[0], 2) == 0)
+	else if (ft_strncmp("EA", temp[0], 3) == 0)
 		i = add_texture(i + 3, temp[1], game, 2);
-	else if (ft_strncmp("WE", temp[0], 2) == 0)
+	else if (ft_strncmp("WE", temp[0], 3) == 0)
 		i = add_texture(i + 3, temp[1], game, 3);
 	else if (ft_strncmp("C", temp[0], 2) == 0)
 		i = set_colors(i, temp[1], game, 0);
@@ -66,30 +64,23 @@ int	check_map_settings(t_game *game)
 	int		i;
 
 	i = 0;
-	printf("checking the map settings lmao\n");
 	if (game->mapdata.no == NULL)
 		return (-1);
-	printf("n was good\n");
 	if (game->mapdata.so == NULL)
 		return (-1);
-	printf("s was good\n");
 	if (game->mapdata.ea == NULL)
 		return (-1);
-	printf("e was good\n");
 	if (game->mapdata.we == NULL)
 		return (-1);
-	printf("w was good\n");
 	while (i < 3)
 	{
 		if (game->mapdata.c[i] < 0 || game->mapdata.c[i] > 255)
 		{
-			printf("C[%i] was bad. It was %i\n", i, game->mapdata.c[i]);
+			printf("Error - C[%i] was bad. It was %i\n", i, game->mapdata.c[i]);
 			return (-1);
 		}
-		printf("c was good\n");
 		if (game->mapdata.f[i] < 0 || game->mapdata.f[i] > 255)
 			return (-1);
-		printf("f was good\n");
 		i++;
 	}
 	return (0);
