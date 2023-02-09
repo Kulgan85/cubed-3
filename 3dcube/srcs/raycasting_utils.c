@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:44:49 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 15:46:14 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:39:20 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	*texture_picker(t_game *game, t_ray *ray_stuff)
 	else if (ray_stuff->side == 1)
 	{
 		if (ray_stuff->ray_dir_y < 0)
-			texture = game->mapdata.northimg;
-		else
 			texture = game->mapdata.southimg;
+		else
+			texture = game->mapdata.northimg;
 	}
 	return (texture);
 }
