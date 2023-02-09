@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:07 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:24:40 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:53:36 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,9 @@ typedef struct s_ray
 	int			beam_pos_y;
 	int			step_x;
 	int			step_y;
+	int			tex_x;
+	int			tex_y;
+	double		tex_pos;
 }	t_ray;
 
 /* Main Struct */
@@ -288,8 +291,20 @@ void		move_backward(t_game *game);
 void		strafe_left(t_game *game);
 void		strafe_right(t_game *game);
 
-/* raycast.c */
+/* raycasting.c */
 void		raycast(t_game *game);
+void		set_raycast_initial(t_game *game, int ray, t_ray *ray_stuff);
+void		shoot_ray(t_game *game, t_ray *ray_stuff);
+void		set_ray_direction(t_game *game, t_ray *ray_stuff);
+void		set_walls(t_game *game, t_ray *ray_stuff);
+
+/* raycasting2.c */
+void		texture_wall(t_game *game, int x, t_ray *ray);
+void		draw_wall(t_game *game, int x, t_ray *aray);
+
+/* raycasting_utils.c */
+void		put_pixel(t_images *image, int x, int y, int colour);
+void		*texture_picker(t_game *game, t_ray *ray_stuff);
 
 /* rotation.c */
 t_pvector	do_rotate(t_pvector vector, double rotate);
