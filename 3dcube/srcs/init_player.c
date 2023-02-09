@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 12:55:30 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/08 16:27:21 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:37:14 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_dir(t_game *game, int y, int x)
 	{
 		game->doom_guy.direction.x = 0;
 		game->doom_guy.direction.y = -1;
-		game->doom_guy.strafe.x = 1;
+		game->doom_guy.strafe.x = -1;
 		game->doom_guy.strafe.y = 0;
 	}
 	if (game->tilemap[y][x].type == EAST)
@@ -59,7 +59,7 @@ void	init_dir(t_game *game, int y, int x)
 	{
 		game->doom_guy.direction.x = 0;
 		game->doom_guy.direction.y = 1;
-		game->doom_guy.strafe.x = -1;
+		game->doom_guy.strafe.x = 1;
 		game->doom_guy.strafe.y = 0;
 	}
 	if (game->tilemap[y][x].type == WEST)

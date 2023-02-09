@@ -6,21 +6,21 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 16:32:31 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:48:33 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /* Perform a lazy flood fill on the map */
-int	floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap)
+int	floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap)
 {
 	printf("max height - %i, max width - %i\n", game->mapdata.max_height, game->mapdata.max_width);
-	printf("wall type - %d\n", tilemap[x][y].type);
+	printf("wall type - %d\n", tilemap[y][y].type);
 	if ((x == 0 || x == game->mapdata.max_width)
 		|| (y == 0 || y == game->mapdata.max_height))
 	{
-		if (tilemap[x][y].type == WALL || tilemap[x][y].type == BLANK)
+		if (tilemap[y][x].type == WALL || tilemap[y][x].type == BLANK)
 		{
 			printf("is outer wall\n");
 			return (1);
@@ -31,10 +31,10 @@ int	floodfill_tile_check(t_game *game, int x, int y, t_tile **tilemap)
 			return (0);
 		}
 	}
-	if (check_tile_skip(tilemap[x][y].type) == 0)
+	if (check_tile_skip(tilemap[y][x].type) == 0)
 		return (1);
-	if ((check_tile_floor(tilemap[x][y].type) == 0)
-		&& (check_adjacent_tile(tilemap, x, y) == 0))
+	if ((check_tile_floor(tilemap[y][x].type) == 0)
+		&& (check_adjacent_tile(tilemap, y, x) == 0))
 		return (1);
 	else
 		return (0);
@@ -159,7 +159,8 @@ t_tile	**generate_tilemap(t_game *game)
 		while (x < game->mapdata.max_width)
 		{
 			printf("%c\n", game->file[skip + y][x]);
-			if (game->file[skip + y][x] == '\0' || game->file[skip+y][x] == EOF)
+			if (game->file[skip + y][x] == '\0'
+				|| game->file[skip + y][x] == EOF)
 			{
 				printf("in new loop\n");
 				while (x <= game->mapdata.max_width)
