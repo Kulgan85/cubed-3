@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 11:37:53 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/08 16:33:12 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:40:55 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	move_forward(t_game *game)
 
 	new_x = game->doom_guy.x;
 	new_y = game->doom_guy.y;
-	printf("Moving forward toward %f at a speed of %f\n",
-		game->doom_guy.direction.x, game->doom_guy.speed);
 	new_x += (game->doom_guy.direction.x * game->doom_guy.speed);
 	new_y += (game->doom_guy.direction.y * game->doom_guy.speed);
 	if ((int)new_x != (int)game->doom_guy.x)

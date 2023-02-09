@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 10:48:33 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:58:45 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,6 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 	t_tile	**new;
 
 	i = 0;
-	// printf("%s\n", game->file[skip + i]);
-	// while (game->file[skip + i] != 0)
-	// 	i++;
 	new = (t_tile **)malloc(sizeof(t_tile *) * game->mapdata.max_height + 1);
 	if (!new)
 		return (NULL);
@@ -115,24 +112,6 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 	return (new);
 }
 
-// static void	brute_force_print_map(t_tile **tilemap, t_game *game)
-// {
-// 	int	x = 0;
-// 	int	y = 0;
-
-// 	while (y <= game->mapdata.max_height)
-// 	{
-// 		x = 0;
-// 		while (x < game->mapdata.max_width)
-// 		{
-// 			printf("%i,", tilemap[y][x].type);
-// 			x++;
-// 		}
-// 		printf("\n");
-// 		y++;
-// 	}
-// }
-
 /* Returns a t_tile table filled according to map,
 columns ends in a NULL pointer */
 t_tile	**generate_tilemap(t_game *game)
@@ -142,17 +121,13 @@ t_tile	**generate_tilemap(t_game *game)
 	int			y;
 	int			skip;
 
-	printf("HOEOEIFNOSENF\n");
 	skip = skip_lines(game);
-	printf("SKIPPING FUCKES\n");
 	game->mapdata.max_height = (count_height(game, skip));
 	game->mapdata.max_width = (count_width(game, skip) - 1);
-	printf("MAPD OIRGNOIRNEF\n");
 	tilemap = alloc_tilemap(skip, game);
 	if (!tilemap)
 		printf("malloc error on alloc_tilemap()\n");
 	y = 0;
-	printf("FUCK\n");
 	while (game->file[skip + y] && y < game->mapdata.max_height)
 	{
 		x = 0;
@@ -162,7 +137,6 @@ t_tile	**generate_tilemap(t_game *game)
 			if (game->file[skip + y][x] == '\0'
 				|| game->file[skip + y][x] == EOF)
 			{
-				printf("in new loop\n");
 				while (x <= game->mapdata.max_width)
 				{
 					tilemap[y][x].type = BLANK;
@@ -171,13 +145,8 @@ t_tile	**generate_tilemap(t_game *game)
 			}
 			else
 			{
-				printf("in old loop");
-				printf("X: %i  Y: %i\n", x, y);
-				printf("defining\n");
 				tilemap[y][x].type = define_tiletype(game->file[skip + y][x]);
-				printf("defining done. Setting up\n");
 				setup_tile(tilemap, y, x, game);
-				printf("setup done.\n");
 				x++;
 			}
 		}

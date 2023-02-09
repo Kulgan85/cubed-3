@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/08 15:47:25 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:49:06 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_mapdata
 	int		f[3];
 	int		max_width;
 	int		max_height;
+	int		player_exists;
 }	t_mapdata;
 
 /* Struct that is used for texturing the walls */
@@ -176,16 +177,9 @@ typedef struct s_player
 /* Ray Struct */
 typedef struct s_ray
 {
-	// double	camera_plane_x;
-	// double	camera_plane_y;
-	// double	camera_plane_x_pos;
-	// double	camera_plane_y_pos;
-	//double	camera_distance;
 	double		camera_x;
 	double		ray_dir_x;
 	double		ray_dir_y;
-	// double		ray_x;
-	// double		ray_y;
 	double		side_dist_x;
 	double		side_dist_y;
 	double		delta_dist_x;
@@ -206,17 +200,6 @@ typedef struct s_ray
 	int			step_x;
 	int			step_y;
 }	t_ray;
-
-/* hitray Struct */
-// typedef struct s_rayhit
-// {
-// 	int		side;
-// 	double	wall_distance;
-// 	double	wall_normal;
-// 	char	*wall_texture;
-// 	int		wall_colour;
-// 	double	wall_x;
-// }	t_rayhit;
 
 /* Main Struct */
 typedef struct s_game

@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:52:54 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 10:48:32 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:55:41 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int	check_tile_floor(t_tiletype tile)
 		printf("fail check tile floor\n");
 		return (1);
 	}
+}
+
+void	check_tile_player(t_game *game, t_tiletype tile)
+{
+	if (tile == NORTH || tile == SOUTH || tile == WEST || tile == EAST)
+		game->mapdata.player_exists = 1;
 }
 
 int	check_adjacent_tile(t_tile **tilemap, int y, int x)

@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:26:44 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 16:28:05 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 12:38:16 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ static char	**alloc_collumns(char *file)
 
 	line_count = file_linecount(file);
 	if (line_count <= 0)
-		printf("open or reading error, check the file exists\n");
+		print_error(3, "Open or reading error, check the file exists\n");
 	map = malloc(sizeof(char *) * line_count + 1);
 	if (map == NULL)
-		printf("malloc error on alloc_map");
+		print_error(2, "Malloc error");
 	return (map);
 }
 
@@ -66,17 +66,13 @@ int	read_map(char *file, t_game *game)
 
 	map = alloc_collumns(file);
 	if (!map)
-	{
-		printf("NULL MAP");
-		return (-1);
-	}
+		print_error(2, "Malloc error");
 	linecount = file_linecount(file);
 	fd = open(file, O_RDONLY);
 	i = 0;
 	while (i < linecount)
 	{	
 		temp = get_next_line(fd);
-		printf("read file portion - %s\n", temp);
 		if (!temp)
 			break ;
 		map[i] = ft_strdup(temp);

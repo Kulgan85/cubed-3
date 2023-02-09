@@ -1,0 +1,18 @@
+NO ./3dcube/textures/Stone_tile_128x128.xpm
+SO ./3dcube/textures/Vine_tile_128x128.xpm
+WE ./3dcube/textures/Vine_Fancy_tile_128x128.xpm
+EA ./3dcube/textures/Fancy_tile_128x128.xpm
+EA ./3dcube/textures/Fancy_tile_128x128.xpm
+
+F 200,200,200
+C 100,100,100
+
+
+1111111
+1101111
+1000011
+1000001
+1111001
+1111011
+1111N11
+1111111
