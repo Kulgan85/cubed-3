@@ -6,7 +6,7 @@
 #    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/02/09 15:24:56 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/02/09 16:00:28 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ FILES = main.c \
 		close_game.c \
 		draw_beegee.c \
 		error.c \
+		floodfill.c \
 		free.c \
 		imageload.c \
 		init_img.c \
@@ -43,6 +44,7 @@ FILES = main.c \
 		map_check.c \
 		map_check_utils.c \
 		map_check_utils2.c \
+		map_check_utils3.c \
 		map_file_check.c \
 		map_file_check_utils.c \
 		mlx_hooks.c \

@@ -6,41 +6,11 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:22:33 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:58:41 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* Perform a lazy flood fill on the map */
-int	floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap)
-{
-	printf("max height - %i, max width - %i\n", game->mapdata.max_height,
-		game->mapdata.max_width);
-	printf("wall type - %d\n", tilemap[y][y].type);
-	if ((x == 0 || x == game->mapdata.max_width)
-		|| (y == 0 || y == game->mapdata.max_height))
-	{
-		if (tilemap[y][x].type == WALL || tilemap[y][x].type == BLANK)
-		{
-			printf("is outer wall\n");
-			return (1);
-		}
-		else
-		{
-			printf("is not outer wall\n");
-			return (0);
-		}
-	}
-	check_tile_player(game, tilemap[y][x].type);
-	if (check_tile_skip(tilemap[y][x].type) == 0)
-		return (1);
-	if ((check_tile_floor(tilemap[y][x].type) == 0)
-		&& (check_adjacent_tile(tilemap, y, x) == 0))
-		return (1);
-	else
-		return (0);
-}
 
 /* Returns the tiletype that corresponds to <definer> */
 t_tiletype	define_tiletype(char definer)
@@ -113,73 +83,36 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 	return (new);
 }
 
+int	generate_tilemap_init(t_game *game)
+{
+	int	skip;
+
+	skip = skip_lines(game);
+	game->mapdata.max_height = (count_height(game, skip));
+	game->mapdata.max_width = (count_width(game, skip) - 1);
+	return (skip);
+}
+
 /* Returns a t_tile table filled according to map,
 columns ends in a NULL pointer */
 t_tile	**generate_tilemap(t_game *game)
 {
 	t_tile		**tilemap;
-	int			x;
-	int			y;
+	t_number	num;
 	int			skip;
 
-	skip = skip_lines(game);
-	game->mapdata.max_height = (count_height(game, skip));
-	game->mapdata.max_width = (count_width(game, skip) - 1);
+	skip = generate_tilemap_init(game);
 	tilemap = alloc_tilemap(skip, game);
 	if (!tilemap)
-		printf("malloc error on alloc_tilemap()\n");
-	y = 0;
-	while (game->file[skip + y] && y < game->mapdata.max_height)
+		print_error(2, "malloc error");
+	num.y = 0;
+	while (game->file[skip + num.y] && num.y < game->mapdata.max_height)
 	{
-		x = 0;
-		while (x < game->mapdata.max_width)
-		{
-			printf("%c\n", game->file[skip + y][x]);
-			if (game->file[skip + y][x] == '\0'
-				|| game->file[skip + y][x] == EOF)
-			{
-				while (x <= game->mapdata.max_width)
-				{
-					tilemap[y][x].type = BLANK;
-					x++;
-				}
-			}
-			else
-			{
-				tilemap[y][x].type = define_tiletype(game->file[skip + y][x]);
-				setup_tile(tilemap, y, x, game);
-				x++;
-			}
-		}
-		y++;
+		num.x = 0;
+		incrementator(game, num, tilemap, skip);
+		num.y++;
 	}
 	if (perform_floodfill(game, tilemap) != 1)
-		print_error(3, "Invalid map");
+		print_error(3, "Invalid floodfill");
 	return (tilemap);
-}
-
-int	perform_floodfill(t_game *game, t_tile **tilemap)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < game->mapdata.max_height)
-	{
-		x = 0;
-		while (x < game->mapdata.max_width)
-		{
-			printf("col %i, row %i\n", x, y);
-			if (!(floodfill_tile_check(game, y, x, tilemap)))
-			{
-				printf("BAD\n");
-				return (0);
-			}
-			x++;
-		}
-		y++;
-	}
-	if (game->mapdata.player_exists == 0)
-		print_error(2, "Bad map: No player");
-	return (1);
 }

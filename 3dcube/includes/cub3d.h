@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:07 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:24:40 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:00:06 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ typedef enum e_tiletype
 	WEST = 'W'
 }	t_tiletype;
 
+/* struct for numbers because norm */
+typedef struct s_number
+{
+	int	x;
+	int	y;
+}	t_number;
+
 /* X and Y direction */
 typedef struct s_vector
 {
@@ -77,6 +84,7 @@ typedef struct s_vector
 	int	y;
 }	t_vector;
 
+/* vector struct */
 typedef struct s_pvector
 {
 	double	x;
@@ -224,6 +232,10 @@ int			create_rgb(int r, int g, int b);
 /* error.c */
 void		print_error(int code, char *str);
 
+/* floodfill.c */
+int			floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap);
+int			perform_floodfill(t_game *game, t_tile **tilemap);
+
 /* free.c */
 void		free_2d_array(char **array);
 void		free_tilemap(t_game *game);
@@ -261,9 +273,12 @@ void		check_tile_player(t_game *game, t_tiletype tile);
 int			check_tile_floor(t_tiletype tile);
 int			check_adjacent_tile(t_tile **tilemap, int y, int x);
 
+/* map_check_utils3.c */
+int			savelines(t_game *game, int x, int y, t_tile **tilemap);
+void		incrementator(t_game *game, t_number num, t_tile **tilemap,
+				int skip);
+
 /* map_check.c */
-int			floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap);
-int			perform_floodfill(t_game *game, t_tile **tilemap);
 t_tiletype	define_tiletype(char definer);
 void		setup_tile(t_tile **tilemap, int y, int x, t_game *game);
 t_tile		**generate_tilemap(t_game *game);
