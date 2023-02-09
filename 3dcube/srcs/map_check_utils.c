@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 19:38:25 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/06 16:33:05 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 13:22:43 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	free_2d_array(char **array)
-{
-	int		i;
-
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free(array);
-}
 
 int	iswhitespace(int i, char *mapfile)
 {
