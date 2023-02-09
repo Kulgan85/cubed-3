@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:07:15 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 13:06:23 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 14:04:57 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,12 +225,15 @@ int			create_rgb(int r, int g, int b);
 /* error.c */
 void		print_error(int code, char *str);
 
+/* free.c */
+void		free_2d_array(char **array);
+void		free_tilemap(t_tile **tile);
+
 /* imageload.c */
 void		imageload(t_game *game);
 
 /* init_img.c */
 int			init_image(t_game *game);
-// void		*new_panel(t_game *game, t_color color);
 
 /* init_mlx.c */
 void		start_mlx(t_game *game);
@@ -251,7 +254,6 @@ void		rotate_left(t_game *game);
 int			main_loop(t_game *game);
 
 /* map_check_utils.c */
-void		free_2d_array(char **array);
 int			iswhitespace(int i, char *mapfile);
 int			skip_lines(t_game *game);
 int			count_height(t_game *game, int skip);
