@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 14:11:59 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:31 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,10 @@ int	init_check(t_game *game)
 	i = 0;
 	j = 0;
 	initialise_struct(&game->mapdata);
-	printf("before char check\n");
 	while (game->file[j] != NULL)
 	{
-		printf("in charcheck\n");
 		charcheck(i, game, game->file[j]);
 		j++;
 	}
-	printf("post charcheck\n");
 	return (check_map_settings(game));
 }

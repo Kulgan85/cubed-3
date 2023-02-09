@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
+#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/02/09 16:00:28 by tbertozz         ###   ########.fr        #
-=======
-#    Updated: 2023/02/09 15:55:21 by jwilliam         ###   ########.fr        #
->>>>>>> 6f8ab23f5d39670f114c73bbcb4f4061de0f7bd5
+#    Updated: 2023/02/09 16:12:45 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

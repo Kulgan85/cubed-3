@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:26:44 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:03:54 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:24:31 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	file_linecount(char	*file)
 		free (readcount);
 	}
 	close (fd);
-	printf("lines counted - %d\n", linecount);
 	return (linecount);
 }
 

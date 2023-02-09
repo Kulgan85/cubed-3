@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:44:32 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/06 16:20:24 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:44 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	add_texture(int i, char *file, t_game *game, int id)
 	int		j;
 	char	*temp;
 
-	printf("within Add Texture\n");
 	j = 0;
 	while (file[j] != '\n')
 		j++;
@@ -26,7 +25,6 @@ int	add_texture(int i, char *file, t_game *game, int id)
 		return (-1);
 	ft_memcpy(temp, file, j);
 	temp[j] = '\0';
-	printf("%s\n", temp);
 	if (id == 0 && game->mapdata.no == NULL)
 		game->mapdata.no = ft_strdup(temp);
 	else if (id == 1 && game->mapdata.so == NULL)
@@ -47,7 +45,6 @@ int	set_colors(int i, char *file, t_game *game, int id)
 	int		k;
 	char	**temp;
 
-	printf("set colors %s\n", file);
 	j = 0;
 	k = 0;
 	while (file[j] != '\n')

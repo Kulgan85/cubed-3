@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:52:54 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 15:15:34 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:34 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,18 @@
 int	check_tile_skip(t_tiletype tile)
 {
 	if (tile == WALL || tile == '\0' || tile == BLANK)
-	{
-		printf("pass tile skip\n");
 		return (0);
-	}
 	else
-	{
-		printf("fail tile skip\n");
 		return (1);
-	}
 }
 
 int	check_tile_floor(t_tiletype tile)
 {
 	if (tile == FLOOR || tile == NORTH || tile == SOUTH || tile == EAST
 		|| tile == WEST)
-	{
-		printf("pass check tile floor\n");
 		return (0);
-	}
 	else
-	{
-		printf("fail check tile floor\n");
 		return (1);
-	}
 }
 
 void	check_tile_player(t_game *game, t_tiletype tile)
@@ -48,7 +36,6 @@ void	check_tile_player(t_game *game, t_tiletype tile)
 		if (game->mapdata.player_exists == 1)
 			print_error(2, "Bad Map: multiple players");
 		game->mapdata.player_exists = 1;
-		printf("Player now exists");
 	}
 	return ;
 }
@@ -59,16 +46,7 @@ int	check_adjacent_tile(t_tile **tilemap, int y, int x)
 		&& (tilemap[y][x].down != NULL && tilemap[y][x].down->type != BLANK)
 		&& (tilemap[y][x].left != NULL && tilemap[y][x].left->type != BLANK)
 		&& (tilemap[y][x].right != NULL && tilemap[y][x].right->type != BLANK))
-	{
-		printf("pass adjacent tile floor\n");
 		return (0);
-	}
 	else
-	{
-		printf("fail adjacent tile floor\n");
-		printf("up: %d down: %d right: %d left: %d\n", tilemap[x][y].up->type,
-			tilemap[x][y].down->type, tilemap[x][y].left->type,
-			tilemap[x][y].right->type);
 		return (1);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:31:09 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:32:03 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:37 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,13 @@
 /* Perform a lazy flood fill on the map */
 int	floodfill_tile_check(t_game *game, int y, int x, t_tile **tilemap)
 {
-	printf("max height - %i, max width - %i\n", game->mapdata.max_height,
-		game->mapdata.max_width);
-	printf("wall type - %d\n", tilemap[y][y].type);
 	if ((x == 0 || x == game->mapdata.max_width)
 		|| (y == 0 || y == game->mapdata.max_height))
 	{
 		if (tilemap[y][x].type == WALL || tilemap[y][x].type == BLANK)
-		{
-			printf("is outer wall\n");
 			return (1);
-		}
 		else
-		{
-			printf("is not outer wall\n");
 			return (0);
-		}
 	}
 	check_tile_player(game, tilemap[y][x].type);
 	if (check_tile_skip(tilemap[y][x].type) == 0)
@@ -53,10 +44,9 @@ int	perform_floodfill(t_game *game, t_tile **tilemap)
 		x = 0;
 		while (x < game->mapdata.max_width)
 		{
-			printf("col %i, row %i\n", x, y);
 			if (!(floodfill_tile_check(game, y, x, tilemap)))
 			{
-				printf("BAD\n");
+				print_error(8, "Floodfill error");
 				return (0);
 			}
 			x++;

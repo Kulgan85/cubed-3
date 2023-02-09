@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:58:41 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 16:12:39 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,16 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 	i = 0;
 	while (game->file[skip + i] != NULL)
 	{
-		printf("%d\n", game->mapdata.max_width);
 		new[i] = (t_tile *)malloc(sizeof(t_tile) * game->mapdata.max_width + 1);
 		if (new == NULL)
 		{
-			printf("Not malloc properly");
+			print_error(2, "malloc error");
 			while (i > 0)
 				free(new[i--]);
 			return (NULL);
 		}
-		printf("Malloc properly\n");
-		printf("Loop number %i\n", i);
 		i++;
 	}
-	printf("done allocating\n");
 	return (new);
 }
 
