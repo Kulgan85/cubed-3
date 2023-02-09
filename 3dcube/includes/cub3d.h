@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:07 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:20:29 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/09 15:24:40 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,13 +288,13 @@ void		move_backward(t_game *game);
 void		strafe_left(t_game *game);
 void		strafe_right(t_game *game);
 
-/* movement2.c */
+/* raycast.c */
+void		raycast(t_game *game);
+
+/* rotation.c */
 t_pvector	do_rotate(t_pvector vector, double rotate);
 void		rotate_right(t_game *game);
 void		rotate_left(t_game *game);
-
-/* raycast.c */
-void		raycast(t_game *game);
 
 /* tilemap_generator.c */
 int			read_map(char *file, t_game *game);

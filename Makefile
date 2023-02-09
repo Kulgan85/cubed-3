@@ -6,7 +6,7 @@
 #    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/02/09 15:19:24 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/02/09 15:24:56 by tbertozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,8 @@ FILES = main.c \
 		map_file_check_utils.c \
 		mlx_hooks.c \
 		movement.c \
-		movement2.c \
 		raycasting.c \
+		rotation.c \
 		tilemap_generator.c \
 
 OBJS_NAME = $(FILES:.c=.o)

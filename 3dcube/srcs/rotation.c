@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement2.c                                        :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 15:17:35 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:18:04 by tbertozz         ###   ########.fr       */
+/*   Created: 2023/02/09 15:19:24 by jwilliam          #+#    #+#             */
+/*   Updated: 2023/02/09 15:20:07 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 
 t_pvector	do_rotate(t_pvector vector, double rotate)
 {
