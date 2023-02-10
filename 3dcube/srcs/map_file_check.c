@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:44:22 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 16:12:31 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:01:45 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	charcheck(int i, t_game *game, char *file)
 		i = set_colors(i, temp[1], game, 1);
 	else
 		i = -1;
-	free (temp);
+	free_2d_array (temp);
 	return (i);
 }
 

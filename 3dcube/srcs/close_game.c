@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 20:03:31 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 15:25:14 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:50:58 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@ int	close_win(t_game *game)
 	free(game->mlx);
 	free(game->img);
 	free_tilemap(game);
+	free_map(game);
+	free_textures(game);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:07 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 16:12:46 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 10:51:18 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ int			perform_floodfill(t_game *game, t_tile **tilemap);
 /* free.c */
 void		free_2d_array(char **array);
 void		free_tilemap(t_game *game);
+void		free_map(t_game *game);
+void		free_textures(t_game *game);
 
 /* imageload.c */
 void		imageload(t_game *game);

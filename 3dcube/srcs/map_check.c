@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:20:04 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 16:12:39 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 11:20:29 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ t_tile	**alloc_tilemap(int skip, t_game *game)
 		new[i] = (t_tile *)malloc(sizeof(t_tile) * game->mapdata.max_width + 1);
 		if (new == NULL)
 		{
-			print_error(2, "malloc error");
 			while (i > 0)
 				free(new[i--]);
+			print_error(2, "malloc error");
 			return (NULL);
 		}
 		i++;
