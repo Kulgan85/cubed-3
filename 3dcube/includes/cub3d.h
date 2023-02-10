@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:11:07 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/10 10:51:18 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:43:32 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,7 @@ typedef struct s_game
 	void		*mlx_window;
 	t_vector	window_size;
 	t_tile		**tilemap;
-	t_images	*img;
+	t_images	img;
 	t_mapdata	mapdata;
 	char		**file;
 	t_player	doom_guy;

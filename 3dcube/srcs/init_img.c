@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:47:42 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 13:07:33 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:17:29 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 int	init_image(t_game *game)
 {
-	game->img = (t_images *)malloc(sizeof (t_images));
-	game->img->width = WIN_WIDTH;
-	game->img->height = WIN_HEIGHT;
-	game->img->pointer = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->img->address = mlx_get_data_addr(game->img->pointer,
-			&game->img->bpp, &game->img->l_size, &game->img->endian);
+	game->img.width = WIN_WIDTH;
+	game->img.height = WIN_HEIGHT;
+	game->img.pointer = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->img.address = mlx_get_data_addr(game->img.pointer,
+			&game->img.bpp, &game->img.l_size, &game->img.endian);
 	return (1);
 }

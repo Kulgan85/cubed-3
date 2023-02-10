@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 12:34:33 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/10 12:00:02 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:43:48 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 	init_image(&game);
 	draw_bg(&game);
 	raycast(&game);
-	mlx_put_image_to_window(game.mlx, game.mlx_window, game.img->pointer, 0, 0);
+	mlx_put_image_to_window(game.mlx, game.mlx_window, game.img.pointer, 0, 0);
 	set_mlx_hooks(&game);
 	mlx_loop_hook(game.mlx, main_loop, &game);
 	mlx_loop(game.mlx);

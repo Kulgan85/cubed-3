@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+         #
+#    By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 14:18:22 by jwilliam          #+#    #+#              #
-#    Updated: 2023/02/09 16:12:45 by tbertozz         ###   ########.fr        #
+#    Updated: 2023/02/10 12:43:33 by jwilliam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 		@$(MAKE) -C ./3dcube/$(LIB)
 		@$(MAKE) -C ./3dcube/$(MLX)
-		@$(CC) $(FLAGS) $(OBJS) -L$(LIB) ./3dcube/$(LIB)/libft.a  -L$(MLX) ./3dcube/$(MLX)/libmlx.a -o $@ $(MLX_FL)
+		@$(CC) $(FLAGS) $(OBJS) ./3dcube/$(LIB)/libft.a ./3dcube/$(MLX)/libmlx.a -o $@ $(MLX_FL)
 		@echo "\033[32m████████████████████████████"
 		@echo "\033[32m█████\033[39mcub3D      created\033[32m█████"
 		@echo "\033[32m████████████████████████████\033[39m"

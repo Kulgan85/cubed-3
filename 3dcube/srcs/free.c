@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:17:41 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/10 12:08:15 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:16:05 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,4 @@ void	free_tilemap(t_game *game)
 void	free_map(t_game *game)
 {
 	free_2d_array(game->file);
-}
-
-void	free_textures(t_game *game)
-{
-	mlx_destroy_image(game->mlx, game->img->pointer);
 }

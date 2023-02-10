@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_check_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 19:38:25 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 16:12:48 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 13:17:19 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,17 @@ int	iswhitespace(int i, char *mapfile)
 int	skip_lines(t_game *game)
 {
 	int			i;
+	char		*temp;
 
 	i = 0;
-	while (ft_strtrim(game->file[i], " ")[0] != '1' &&
-			ft_strtrim(game->file[i], " ")[0] != '0')
+	temp = ft_strtrim(game->file[i], " ");
+	while (temp[i] != '1' && temp[i] != '0')
+	{
+		free(temp);
+		temp = ft_strtrim(game->file[i], " ");
 		i++;
+	}
+	free(temp);
 	return (i);
 }
 

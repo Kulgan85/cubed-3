@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:50:39 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/09 15:53:54 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:45:43 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	texture_wall(t_game *game, int x, t_ray *ray)
 		ray->tex_y = (int)ray->tex_pos;
 		ray->tex_pos += step;
 		colour = imgdata[TEX_HEIGHT * ray->tex_y + ray->tex_x];
-		put_pixel(game->img, x, y, colour);
+		put_pixel(&game->img, x, y, colour);
 		y++;
 	}
 }

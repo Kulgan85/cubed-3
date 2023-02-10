@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_beegee.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 14:25:09 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 12:46:36 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:44:21 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	draw_bg(t_game *game)
 	int		*new_image;
 	int		i;
 
-	ft_bzero(game->img->address, WIN_WIDTH * WIN_HEIGHT * (game->img->bpp / 8));
-	new_image = (int *)(game->img->address);
+	ft_bzero(game->img.address, WIN_WIDTH * WIN_HEIGHT * (game->img.bpp / 8));
+	new_image = (int *)(game->img.address);
 	i = 0;
 	while (i < (WIN_WIDTH * (WIN_HEIGHT / 2)))
 	{

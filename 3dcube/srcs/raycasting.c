@@ -6,7 +6,7 @@
 /*   By: jwilliam <jwilliam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:42:08 by tbertozz          #+#    #+#             */
-/*   Updated: 2023/02/09 15:52:24 by jwilliam         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:45:31 by jwilliam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ void	raycast(t_game *game)
 		draw_wall(game, ray, &ray_stuff);
 		ray++;
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_window, game->img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->mlx_window, &game->img, 0, 0);
 	return ;
 }
