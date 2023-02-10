@@ -6,7 +6,7 @@
 /*   By: tbertozz <tbertozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 13:17:41 by jwilliam          #+#    #+#             */
-/*   Updated: 2023/02/10 11:59:15 by tbertozz         ###   ########.fr       */
+/*   Updated: 2023/02/10 12:08:15 by tbertozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,5 @@ void	free_map(t_game *game)
 
 void	free_textures(t_game *game)
 {
-	if (game->img->address)
-		free(game->img->address);
-	if (game->img->pointer)
-		free(game->img->pointer);
-}
-
-void	free_imgs(t_game *game)
-{
-	if (game->img)
-		free(game->img);
+	mlx_destroy_image(game->mlx, game->img->pointer);
 }
