@@ -1,5 +1,8 @@
 # cubed^3
-42 project
+42 group project
+
+# Group members
+https://github.com/justsomeotherguy
 
 # Showcase
 https://youtu.be/D7CTQMrE5x0
